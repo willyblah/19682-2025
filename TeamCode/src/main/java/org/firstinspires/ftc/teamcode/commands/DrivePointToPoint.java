@@ -12,7 +12,7 @@ public class DrivePointToPoint extends CommandBase {
     private Follower follower;
     private Pose originalPos, targetPos, midPos1, midPos2, midPos3;
     private int numberOfPoints;
-    private boolean holdEnd = true;
+    private boolean holdEnd = false;
     private double breaking = 1.0;
 
     public DrivePointToPoint(Follower follower, Pose start, Pose mid1, Pose mid2, Pose mid3, Pose end) {

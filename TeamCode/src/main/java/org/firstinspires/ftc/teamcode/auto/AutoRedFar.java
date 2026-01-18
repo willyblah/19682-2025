@@ -48,13 +48,9 @@ public class AutoRedFar extends OpMode {
         }
     }
 
-    public static void draw() {
-        Drawing.drawDebug(follower.follower);
-    }
-
     @Override
     public void init_loop() {
-        robot.shooter.panelTo(0);
+        robot.shooter.panelTo(PANEL_FAR);
         follower.follower.update();
         drawOnlyCurrent();
     }
@@ -63,7 +59,7 @@ public class AutoRedFar extends OpMode {
     public void loop() {
         CommandScheduler.getInstance().run();
         follower.follower.update();
-        draw();
+        Drawing.drawDebug(follower.follower);
     }
 
     @Override
@@ -74,15 +70,14 @@ public class AutoRedFar extends OpMode {
         // 使用命令调度器安排一系列顺序执行的命令组
         CommandScheduler.getInstance().schedule(
                 new SequentialCommandGroup(
-                        new DrivePointToPoint(follower, RED_FAR_START, RED_FAR_SHOOT).setHoldEnd(false),
+                        new DrivePointToPoint(follower, RED_FAR_START, RED_FAR_SHOOT),
                         new InstantCommand(() -> robot.intake.intakeIn()),
                         new WaitCommand(300),
 
                         new InstantCommand(() -> robot.shooter.triggerPut()),
-                        new InstantCommand(() -> robot.shooter.panelTo(PANEL_FAR)),
-                        new WaitCommand(500),
+                        new WaitCommand(300),
                         new InstantCommand(() -> robot.shooter.triggerFire()),
-                        new WaitCommand(1400),
+                        new WaitCommand(1500),
                         new InstantCommand(() -> robot.shooter.shooterStop()),
                         new InstantCommand(() -> robot.shooter.triggerHold()),
 
@@ -90,50 +85,48 @@ public class AutoRedFar extends OpMode {
                         new InstantCommand(() -> robot.intake.intakeIn()),
                         new InstantCommand(() -> robot.shooter.setTriggerMotor()),
                         new InstantCommand(() -> robot.shooter.setTriggerServo()),
-                        new DrivePointToPoint(follower, RED_FAR_SHOOT, RED_FAR_INTAKE_1).setHoldEnd(false),
+                        new DrivePointToPoint(follower, RED_FAR_SHOOT, RED_FAR_INTAKE_1),
                         new WaitCommand(400),
-                        new DrivePointToPoint(follower, RED_FAR_INTAKE_1, RED_FAR_INTAKE_2).setHoldEnd(false),
+                        new DrivePointToPoint(follower, RED_FAR_INTAKE_1, RED_FAR_INTAKE_2),
+                        new DrivePointToPoint(follower, RED_FAR_INTAKE_2, RED_FAR_INTAKE_3),
                         new WaitCommand(400),
-                        new DrivePointToPoint(follower, RED_FAR_INTAKE_2, RED_FAR_INTAKE_3).setHoldEnd(false),
-                        new WaitCommand(400),
-                        new DrivePointToPoint(follower, RED_FAR_INTAKE_3, RED_FAR_SHOOT).setHoldEnd(false),
+                        new DrivePointToPoint(follower, RED_FAR_INTAKE_3, RED_FAR_SHOOT),
                         new WaitCommand(200),
 
                         new InstantCommand(() -> robot.shooter.triggerPut()),
-                        new WaitCommand(200),
+                        new WaitCommand(300),
                         new InstantCommand(() -> robot.shooter.setShooterVelocity(SHOOT_VELOCITY_FAR)),
-                        new InstantCommand(() -> robot.shooter.panelTo(PANEL_FAR)),
                         new WaitCommand(500),
                         new InstantCommand(() -> robot.shooter.triggerFire()),
-                        new WaitCommand(1400),
+                        new WaitCommand(1500),
                         new InstantCommand(() -> robot.shooter.shooterStop()),
                         new InstantCommand(() -> robot.shooter.triggerHold()),
+
+                        new WaitCommand(5000),
 
                         // 第二次
                         new InstantCommand(() -> robot.intake.intakeIn()),
                         new InstantCommand(() -> robot.shooter.setTriggerMotor()),
                         new InstantCommand(() -> robot.shooter.setTriggerServo()),
-                        new DrivePointToPoint(follower, RED_FAR_SHOOT, RED_FAR_INTAKE_1).setHoldEnd(false),
+                        new DrivePointToPoint(follower, RED_FAR_SHOOT, RED_FAR_INTAKE_1),
                         new WaitCommand(400),
-                        new DrivePointToPoint(follower, RED_FAR_INTAKE_1, RED_FAR_INTAKE_2).setHoldEnd(false),
+                        new DrivePointToPoint(follower, RED_FAR_INTAKE_1, RED_FAR_INTAKE_2),
+                        new DrivePointToPoint(follower, RED_FAR_INTAKE_2, RED_FAR_INTAKE_3),
                         new WaitCommand(400),
-                        new DrivePointToPoint(follower, RED_FAR_INTAKE_2, RED_FAR_INTAKE_3).setHoldEnd(false),
-                        new WaitCommand(400),
-                        new DrivePointToPoint(follower, RED_FAR_INTAKE_3, RED_FAR_SHOOT).setHoldEnd(false),
+                        new DrivePointToPoint(follower, RED_FAR_INTAKE_3, RED_FAR_SHOOT),
                         new WaitCommand(200),
 
                         new InstantCommand(() -> robot.shooter.triggerPut()),
-                        new WaitCommand(200),
+                        new WaitCommand(300),
                         new InstantCommand(() -> robot.shooter.setShooterVelocity(SHOOT_VELOCITY_FAR)),
-                        new InstantCommand(() -> robot.shooter.panelTo(PANEL_FAR)),
                         new WaitCommand(500),
                         new InstantCommand(() -> robot.shooter.triggerFire()),
-                        new WaitCommand(1400),
+                        new WaitCommand(1500),
                         new InstantCommand(() -> robot.shooter.shooterStop()),
                         new InstantCommand(() -> robot.shooter.triggerHold()),
 
                         // 移动到停车位置
-                        new DrivePointToPoint(follower, RED_FAR_SHOOT, RED_FAR_PARK).setHoldEnd(false),
+                        new DrivePointToPoint(follower, RED_FAR_SHOOT, RED_FAR_PARK),
 
                         new InstantCommand(this::stop)
                 )

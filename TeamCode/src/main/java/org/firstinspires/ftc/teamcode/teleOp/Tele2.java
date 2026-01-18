@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.subsystems.Robot;
 
-@TeleOp(name = "Two Controllers")
+@TeleOp
 public class Tele2 extends LinearOpMode {
     Robot robot = new Robot();
     boolean shooterOn = false;

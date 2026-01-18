@@ -49,13 +49,9 @@ public class AutoRedNear extends OpMode {
         }
     }
 
-    public static void draw() {
-        Drawing.drawDebug(follower.follower);
-    }
-
     @Override
     public void init_loop() {
-        robot.shooter.panelTo(0);
+        robot.shooter.panelTo(PANEL_NER_1);
         follower.follower.update();
         drawOnlyCurrent();
     }
@@ -64,7 +60,7 @@ public class AutoRedNear extends OpMode {
     public void loop() {
         CommandScheduler.getInstance().run();
         follower.follower.update();
-        draw();
+        Drawing.drawDebug(follower.follower);
     }
 
     @Override
@@ -76,60 +72,56 @@ public class AutoRedNear extends OpMode {
         CommandScheduler.getInstance().schedule(
                 new SequentialCommandGroup(
                         // 第一轮发射
-                        new DrivePointToPoint(follower, RED_NER_START, RED_NER_SHOOT_1).setHoldEnd(false),
+                        new DrivePointToPoint(follower, RED_NER_START, RED_NER_SHOOT),
                         new InstantCommand(() -> robot.intake.intakeIn()),
                         new WaitCommand(300),
 
                         new InstantCommand(() -> robot.shooter.triggerPut()),
-                        new InstantCommand(() -> robot.shooter.panelTo(PANEL_NER_1)),
-                        new WaitCommand(500),
+                        new WaitCommand(300),
                         new InstantCommand(() -> robot.shooter.triggerFire()),
-                        new WaitCommand(1400),
+                        new WaitCommand(1200),
                         new InstantCommand(() -> robot.shooter.shooterStop()),
                         new InstantCommand(() -> robot.shooter.triggerHold()),
 
-                        new WaitCommand(500),
+                        new WaitCommand(300),
 
                         // 收集第一组球
                         new InstantCommand(() -> robot.intake.intakeIn()),
                         new InstantCommand(() -> robot.shooter.setTriggerMotor()),
                         new InstantCommand(() -> robot.shooter.setTriggerServo()),
-                        new DrivePointToPoint(follower, RED_NER_SHOOT_1, RED_NER_INTAKE_PRE_1).setHoldEnd(false),
+                        new DrivePointToPoint(follower, RED_NER_SHOOT, RED_NER_INTAKE_PRE_1),
                         new WaitCommand(300),
                         new ParallelCommandGroup(
-                                new DrivePointToPoint(follower, RED_NER_INTAKE_PRE_1, RED_NER_INTAKE_1).setHoldEnd(false),
+                                new DrivePointToPoint(follower, RED_NER_INTAKE_PRE_1, RED_NER_INTAKE_1),
                                 new SequentialCommandGroup(
                                         new WaitCommand(1000),
                                         new InstantCommand(() -> robot.shooter.triggerHold()),
                                         new InstantCommand(() -> robot.shooter.setTriggerServo())
                                 )
                         ),
-                        new WaitCommand(500),
+                        new WaitCommand(300),
 
                         // 发射第一组球
-                        new ParallelCommandGroup(
-                                new DrivePointToPoint(follower, RED_NER_INTAKE_1, RED_NER_SHOOT_1).setHoldEnd(false),
-                                new InstantCommand(() -> robot.shooter.panelTo(PANEL_NER_1))
-                        ),
+                        new DrivePointToPoint(follower, RED_NER_INTAKE_1, RED_NER_SHOOT),
                         new InstantCommand(() -> robot.shooter.triggerPut()),
                         new InstantCommand(() -> robot.shooter.setShooterVelocity(SHOOT_VELOCITY_NER_1)),
                         new WaitCommand(500),
                         new InstantCommand(() -> robot.shooter.triggerFire()),
-                        new WaitCommand(1400),
+                        new WaitCommand(1200),
 
                         new InstantCommand(() -> robot.shooter.shooterStop()),
                         new InstantCommand(() -> robot.shooter.triggerHold()),
 
-                        new WaitCommand(500),
+                        new WaitCommand(300),
 
                         // 收集第二组球
                         new InstantCommand(() -> robot.intake.intakeIn()),
                         new InstantCommand(() -> robot.shooter.setTriggerMotor()),
                         new InstantCommand(() -> robot.shooter.setTriggerServo()),
-                        new DrivePointToPoint(follower, RED_NER_SHOOT_1, RED_NER_INTAKE_PRE_2).setHoldEnd(false),
-                        new WaitCommand(500),
+                        new DrivePointToPoint(follower, RED_NER_SHOOT, RED_NER_INTAKE_PRE_2),
+                        new WaitCommand(300),
                         new ParallelCommandGroup(
-                                new DrivePointToPoint(follower, RED_NER_INTAKE_PRE_2, RED_NER_INTAKE_2).setHoldEnd(false),
+                                new DrivePointToPoint(follower, RED_NER_INTAKE_PRE_2, RED_NER_INTAKE_2),
                                 new SequentialCommandGroup(
                                         new WaitCommand(1000),
                                         new InstantCommand(() -> robot.shooter.triggerHold()),
@@ -139,29 +131,26 @@ public class AutoRedNear extends OpMode {
                         new WaitCommand(300),
 
                         // 发射第二组球
-                        new ParallelCommandGroup(
-                                new DrivePointToPoint(follower, RED_NER_INTAKE_2, RED_NER_SHOOT_2).setHoldEnd(false),
-                                new InstantCommand(() -> robot.shooter.panelTo(PANEL_NER_1))
-                        ),
+                        new DrivePointToPoint(follower, RED_NER_INTAKE_2, RED_NER_SHOOT),
                         new InstantCommand(() -> robot.shooter.triggerPut()),
                         new InstantCommand(() -> robot.shooter.setShooterVelocity(SHOOT_VELOCITY_NER_1)),
                         new WaitCommand(500),
                         new InstantCommand(() -> robot.shooter.triggerFire()),
-                        new WaitCommand(1400),
+                        new WaitCommand(1200),
 
                         new InstantCommand(() -> robot.shooter.shooterStop()),
                         new InstantCommand(() -> robot.shooter.triggerHold()),
 
-                        new WaitCommand(500),
+                        new WaitCommand(300),
 
                         // 收集第三组球
                         new InstantCommand(() -> robot.intake.intakeIn()),
                         new InstantCommand(() -> robot.shooter.setTriggerMotor()),
                         new InstantCommand(() -> robot.shooter.setTriggerServo()),
-                        new DrivePointToPoint(follower, RED_NER_SHOOT_2, RED_NER_INTAKE_PRE_3).setHoldEnd(false),
-                        new WaitCommand(500),
+                        new DrivePointToPoint(follower, RED_NER_SHOOT, RED_NER_INTAKE_PRE_3),
+                        new WaitCommand(300),
                         new ParallelCommandGroup(
-                                new DrivePointToPoint(follower, RED_NER_INTAKE_PRE_3, RED_NER_INTAKE_3).setHoldEnd(false),
+                                new DrivePointToPoint(follower, RED_NER_INTAKE_PRE_3, RED_NER_INTAKE_3),
                                 new SequentialCommandGroup(
                                         new WaitCommand(1000),
                                         new InstantCommand(() -> robot.shooter.triggerHold()),
@@ -171,15 +160,12 @@ public class AutoRedNear extends OpMode {
                         new WaitCommand(300),
 
                         // 发射第三组球
-                        new ParallelCommandGroup(
-                                new DrivePointToPoint(follower, RED_NER_INTAKE_3, RED_NER_SHOOT_3).setHoldEnd(false),
-                                new InstantCommand(() -> robot.shooter.panelTo(PANEL_NER_1))
-                        ),
+                        new DrivePointToPoint(follower, RED_NER_INTAKE_3, RED_NER_SHOOT),
                         new InstantCommand(() -> robot.shooter.triggerPut()),
                         new InstantCommand(() -> robot.shooter.setShooterVelocity(SHOOT_VELOCITY_NER_1)),
                         new WaitCommand(500),
                         new InstantCommand(() -> robot.shooter.triggerFire()),
-                        new WaitCommand(1400),
+                        new WaitCommand(1200),
 
                         new InstantCommand(() -> robot.shooter.shooterStop()),
                         new InstantCommand(() -> robot.shooter.triggerHold()),
@@ -187,7 +173,7 @@ public class AutoRedNear extends OpMode {
                         new InstantCommand(() -> robot.intake.intakeStop()),
 
                         new WaitCommand(200),
-                        new DrivePointToPoint(follower, RED_NER_SHOOT_3, RED_NER_PARK).setHoldEnd(false),
+                        new DrivePointToPoint(follower, RED_NER_SHOOT, RED_NER_PARK),
 
                         new InstantCommand(this::stop)
                 )

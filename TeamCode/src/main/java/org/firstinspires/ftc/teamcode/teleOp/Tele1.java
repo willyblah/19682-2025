@@ -12,7 +12,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.Pose2D;
 import org.firstinspires.ftc.teamcode.subsystems.Robot;
 
-@TeleOp(name = "One Controller")
+@TeleOp
 public class Tele1 extends LinearOpMode {
     Robot robot = new Robot();
     boolean shooterOn = false;
@@ -87,11 +87,10 @@ public class Tele1 extends LinearOpMode {
             } else if (gamepad1.a) {
                 robot.shooter.triggerPut();
                 robot.intake.intakeIn();
+            } else {
+                robot.intake.intakeStop();
+                robot.shooter.triggerHold();
             }
-//            else {
-//                robot.intake.intakeStop();
-//                robot.shooter.triggerHold();
-//            }
 
             telemetry.addData("target velocity", velocity);
             telemetry.addData("current velocity", robot.shooter.getShooterVelocity());
@@ -101,8 +100,6 @@ public class Tele1 extends LinearOpMode {
             telemetry.addData("turretCurrentHeading", turretCurrentHeading);
             telemetry.addData("turretTargetHeading", turretTargetHeading);
             telemetry.addData("current", robot.drivetrain.getPosition());
-
-            telemetry.addData("心情状态", "非常抽象");
 
             telemetry.update();
         }
