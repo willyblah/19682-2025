@@ -5,6 +5,7 @@ import static org.firstinspires.ftc.teamcode.constants.RobotConstants.*;
 
 import com.arcrobotics.ftclib.command.CommandScheduler;
 import com.arcrobotics.ftclib.command.InstantCommand;
+import com.arcrobotics.ftclib.command.ParallelCommandGroup;
 import com.arcrobotics.ftclib.command.SequentialCommandGroup;
 import com.arcrobotics.ftclib.command.WaitCommand;
 import com.bylazar.configurables.annotations.IgnoreConfigurable;
@@ -70,16 +71,16 @@ public class AutoBlueFar extends OpMode {
         // 使用命令调度器安排一系列顺序执行的命令组
         CommandScheduler.getInstance().schedule(
                 new SequentialCommandGroup(
-                        new DrivePointToPoint(follower, BLUE_FAR_START, BLUE_FAR_SHOOT),
-                        new InstantCommand(() -> robot.intake.intakeIn()),
-                        new WaitCommand(300),
+                        new ParallelCommandGroup(
+                                new DrivePointToPoint(follower, BLUE_FAR_START, BLUE_FAR_SHOOT),
+                                new InstantCommand(() -> robot.intake.intakeIn())
+                        ),
 
                         new InstantCommand(() -> robot.shooter.triggerPut()),
                         new WaitCommand(300),
                         new InstantCommand(() -> robot.shooter.triggerFire()),
                         new WaitCommand(1500),
                         new InstantCommand(() -> robot.shooter.shooterStop()),
-                        new InstantCommand(() -> robot.shooter.triggerHold()),
 
                         // 第一次
                         new InstantCommand(() -> robot.intake.intakeIn()),
@@ -90,11 +91,11 @@ public class AutoBlueFar extends OpMode {
                         new DrivePointToPoint(follower, BLUE_FAR_INTAKE_1, BLUE_FAR_INTAKE_2),
                         new DrivePointToPoint(follower, BLUE_FAR_INTAKE_2, BLUE_FAR_INTAKE_3),
                         new WaitCommand(400),
-                        new DrivePointToPoint(follower, BLUE_FAR_INTAKE_3, BLUE_FAR_SHOOT),
-                        new WaitCommand(200),
+                        new InstantCommand(() -> robot.shooter.triggerHold()),
 
+                        new DrivePointToPoint(follower, BLUE_FAR_INTAKE_3, BLUE_FAR_SHOOT),
                         new InstantCommand(() -> robot.shooter.triggerPut()),
-                        new WaitCommand(300),
+                        new WaitCommand(200),
                         new InstantCommand(() -> robot.shooter.setShooterVelocity(SHOOT_VELOCITY_FAR)),
                         new WaitCommand(500),
                         new InstantCommand(() -> robot.shooter.triggerFire()),
@@ -113,11 +114,11 @@ public class AutoBlueFar extends OpMode {
                         new DrivePointToPoint(follower, BLUE_FAR_INTAKE_1, BLUE_FAR_INTAKE_2),
                         new DrivePointToPoint(follower, BLUE_FAR_INTAKE_2, BLUE_FAR_INTAKE_3),
                         new WaitCommand(400),
-                        new DrivePointToPoint(follower, BLUE_FAR_INTAKE_3, BLUE_FAR_SHOOT),
-                        new WaitCommand(200),
+                        new InstantCommand(() -> robot.shooter.triggerHold()),
 
+                        new DrivePointToPoint(follower, BLUE_FAR_INTAKE_3, BLUE_FAR_SHOOT),
                         new InstantCommand(() -> robot.shooter.triggerPut()),
-                        new WaitCommand(300),
+                        new WaitCommand(200),
                         new InstantCommand(() -> robot.shooter.setShooterVelocity(SHOOT_VELOCITY_FAR)),
                         new WaitCommand(500),
                         new InstantCommand(() -> robot.shooter.triggerFire()),
@@ -127,7 +128,6 @@ public class AutoBlueFar extends OpMode {
 
                         // 移动到停车位置
                         new DrivePointToPoint(follower, BLUE_FAR_SHOOT, BLUE_FAR_PARK),
-
                         new InstantCommand(this::stop)
                 )
         );

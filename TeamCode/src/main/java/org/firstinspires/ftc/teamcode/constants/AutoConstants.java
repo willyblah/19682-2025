@@ -1,10 +1,10 @@
 package org.firstinspires.ftc.teamcode.constants;
 
+import com.bylazar.configurables.annotations.Configurable;
 import com.pedropathing.geometry.Pose;
 
+@Configurable
 public class AutoConstants {
-
-    // ------------ 红色方 ------------
 
     // 近端摆位点
     public static Pose RED_NER_START = new Pose(123.5, 122.5, Math.toRadians(130));
@@ -24,6 +24,9 @@ public class AutoConstants {
     // 发射位置
     public static Pose RED_NER_SHOOT = new Pose(97, 89, Math.toRadians(135));
 
+    // 开闸吸球位置
+    public static Pose RED_NER_GATE = new Pose(134, 63, Math.toRadians(125));
+
     // 停车位置
     public static Pose RED_NER_PARK = new Pose(114, 78, Math.toRadians(90));
 
@@ -39,7 +42,6 @@ public class AutoConstants {
     // 远点停车位置
     public static Pose RED_FAR_PARK = new Pose(110, 10, Math.toRadians(180));
 
-    // ------------ 蓝色方 ------------
 
     public static Pose BLUE_NER_START = RED_NER_START.mirror();
     public static Pose BLUE_NER_INTAKE_PRE_1 = RED_NER_INTAKE_PRE_1.mirror();
@@ -52,6 +54,7 @@ public class AutoConstants {
     public static Pose BLUE_NER_PARK = RED_NER_PARK.mirror();
     public static Pose BLUE_FAR_START = RED_FAR_START.mirror();
     public static Pose BLUE_FAR_SHOOT = RED_FAR_SHOOT.mirror();
+    public static Pose BLUE_NER_GATE = RED_NER_GATE.mirror();
     public static Pose BLUE_FAR_INTAKE_1 = RED_FAR_INTAKE_1.mirror();
     public static Pose BLUE_FAR_INTAKE_2 = RED_FAR_INTAKE_2.mirror();
     public static Pose BLUE_FAR_INTAKE_3 = RED_FAR_INTAKE_3.mirror();

@@ -2,8 +2,6 @@ package org.firstinspires.ftc.teamcode.teleOp;
 
 import static org.firstinspires.ftc.teamcode.constants.RobotConstants.*;
 
-import com.bylazar.telemetry.JoinedTelemetry;
-import com.bylazar.telemetry.PanelsTelemetry;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
@@ -18,7 +16,6 @@ public class Tele1 extends LinearOpMode {
     boolean shooterOn = false;
     double velocity = 2000, panel = 0;
     double targetX = 136.5, targetY = 138;
-    JoinedTelemetry joinedTele;
     double distance;
     int turretTargetHeading = 0;
     double targetATAN, turretCurrentHeading;
@@ -29,7 +26,6 @@ public class Tele1 extends LinearOpMode {
         robot.drivetrain.pinPoint.setPosition(new Pose2D(DistanceUnit.INCH, autoEndY, 144 - autoEndX, AngleUnit.RADIANS, autoEndH + Math.PI / 2.0));
         targetX = teleOpTargetX;
         targetY = teleOpTargetY;
-        joinedTele = new JoinedTelemetry(telemetry, PanelsTelemetry.INSTANCE.getFtcTelemetry());
 
         waitForStart();
 
