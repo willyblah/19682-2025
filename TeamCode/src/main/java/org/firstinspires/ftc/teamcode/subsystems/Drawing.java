@@ -134,7 +134,6 @@ public class Drawing {
 
         int size = poseTracker.getXPositionsArray().length;
         for (int i = 0; i < size - 1; i++) {
-
             panelsField.moveCursor(poseTracker.getXPositionsArray()[i], poseTracker.getYPositionsArray()[i]);
             panelsField.line(poseTracker.getXPositionsArray()[i + 1], poseTracker.getYPositionsArray()[i + 1]);
         }

@@ -29,13 +29,10 @@ public class Tele2 extends LinearOpMode {
                 robot.intake.intakeStop();
             }
 
-            // 近点 1 位置发射设置
             if (gamepad2.xWasPressed()) {
                 panel = PANEL_NER_1;
                 velocity = SHOOT_VELOCITY_NER_1;
-            }
-            // 近点 2 位置发射设置
-            else if (gamepad2.yWasPressed()) {
+            } else if (gamepad2.yWasPressed()) {
                 panel = PANEL_NER_2;
                 velocity = SHOOT_VELOCITY_NER_2;
             } else if (gamepad2.bWasPressed()) {
@@ -43,7 +40,9 @@ public class Tele2 extends LinearOpMode {
                 velocity = SHOOT_VELOCITY_FAR;
             }
 
-            if (gamepad2.leftBumperWasPressed()) shooterOn = !shooterOn;
+            if (gamepad2.leftBumperWasPressed()) {
+                shooterOn = !shooterOn;
+            }
             if (shooterOn) {
                 robot.shooter.setShooterVelocity(velocity);
             } else {
@@ -51,10 +50,6 @@ public class Tele2 extends LinearOpMode {
             }
 
             robot.shooter.panelTo(panel);
-
-            if (gamepad2.dpad_right) {
-                robot.shooter.setTriggerMotor();
-            }
 
             if (gamepad2.right_bumper) {
                 robot.intake.intakeIn();

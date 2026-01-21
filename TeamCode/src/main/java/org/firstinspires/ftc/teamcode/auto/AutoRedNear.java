@@ -5,7 +5,6 @@ import static org.firstinspires.ftc.teamcode.constants.RobotConstants.*;
 
 import com.arcrobotics.ftclib.command.CommandScheduler;
 import com.arcrobotics.ftclib.command.InstantCommand;
-import com.arcrobotics.ftclib.command.ParallelCommandGroup;
 import com.arcrobotics.ftclib.command.SequentialCommandGroup;
 import com.arcrobotics.ftclib.command.WaitCommand;
 import com.bylazar.configurables.annotations.IgnoreConfigurable;
@@ -65,79 +64,65 @@ public class AutoRedNear extends OpMode {
 
     @Override
     public void start() {
-        robot.shooter.setShooterVelocity(SHOOT_VELOCITY_NER_1);
         // 激活所有PIDF控制器
         follower.follower.activateAllPIDFs();
         // 使用命令调度器安排一系列顺序执行的命令组
         CommandScheduler.getInstance().schedule(
                 new SequentialCommandGroup(
                         // 发射预载球
-                        new ParallelCommandGroup(
-                                new DrivePointToPoint(follower, RED_FAR_START, RED_FAR_SHOOT),
-                                new InstantCommand(() -> robot.intake.intakeIn())
-                        ),
-                        new InstantCommand(() -> robot.shooter.triggerPut()),
+                        new InstantCommand(() -> robot.shooter.setShooterVelocity(SHOOT_VELOCITY_NER_1)),
+                        new DrivePointToPoint(follower, RED_NER_START, RED_NER_SHOOT),
+                        new InstantCommand(() -> robot.intake.intakeIn()),
                         new WaitCommand(300),
+                        new InstantCommand(() -> robot.shooter.triggerPut()),
+                        new WaitCommand(200),
                         new InstantCommand(() -> robot.shooter.triggerFire()),
-                        new WaitCommand(1200),
+                        new WaitCommand(1100),
                         new InstantCommand(() -> robot.shooter.shooterStop()),
+                        new InstantCommand(() -> robot.shooter.triggerHold()),
 
                         // 收集第一组球
-                        new InstantCommand(() -> robot.intake.intakeIn()),
-                        new InstantCommand(() -> robot.shooter.setTriggerMotor()),
-                        new InstantCommand(() -> robot.shooter.setTriggerServo()),
                         new DrivePointToPoint(follower, RED_NER_SHOOT, RED_NER_INTAKE_PRE_1),
                         new DrivePointToPoint(follower, RED_NER_INTAKE_PRE_1, RED_NER_INTAKE_1),
                         new WaitCommand(300),
-                        new InstantCommand(() -> robot.shooter.triggerHold()),
 
                         // 发射第一组球
+                        new InstantCommand(() -> robot.shooter.setShooterVelocity(SHOOT_VELOCITY_NER_1)),
                         new DrivePointToPoint(follower, RED_NER_INTAKE_1, RED_NER_SHOOT),
                         new InstantCommand(() -> robot.shooter.triggerPut()),
-                        new WaitCommand(200),
-                        new InstantCommand(() -> robot.shooter.setShooterVelocity(SHOOT_VELOCITY_NER_1)),
-                        new WaitCommand(500),
+                        new WaitCommand(300),
                         new InstantCommand(() -> robot.shooter.triggerFire()),
-                        new WaitCommand(1200),
+                        new WaitCommand(1100),
                         new InstantCommand(() -> robot.shooter.shooterStop()),
+                        new InstantCommand(() -> robot.shooter.triggerHold()),
 
                         // 收集第二组球
-                        new InstantCommand(() -> robot.intake.intakeIn()),
-                        new InstantCommand(() -> robot.shooter.setTriggerMotor()),
-                        new InstantCommand(() -> robot.shooter.setTriggerServo()),
                         new DrivePointToPoint(follower, RED_NER_SHOOT, RED_NER_INTAKE_PRE_2),
                         new DrivePointToPoint(follower, RED_NER_INTAKE_PRE_2, RED_NER_INTAKE_2),
                         new WaitCommand(300),
-                        new InstantCommand(() -> robot.shooter.triggerHold()),
 
                         // 发射第二组球
+                        new InstantCommand(() -> robot.shooter.setShooterVelocity(SHOOT_VELOCITY_NER_1)),
                         new DrivePointToPoint(follower, RED_NER_INTAKE_2, RED_NER_SHOOT),
                         new InstantCommand(() -> robot.shooter.triggerPut()),
-                        new WaitCommand(200),
-                        new InstantCommand(() -> robot.shooter.setShooterVelocity(SHOOT_VELOCITY_NER_1)),
-                        new WaitCommand(500),
-                        new InstantCommand(() -> robot.shooter.triggerFire()),
-                        new WaitCommand(1200),
-                        new InstantCommand(() -> robot.shooter.shooterStop()),
-
-                        // 收集第三组球
-                        new InstantCommand(() -> robot.intake.intakeIn()),
-                        new InstantCommand(() -> robot.shooter.setTriggerMotor()),
-                        new InstantCommand(() -> robot.shooter.setTriggerServo()),
-                        new DrivePointToPoint(follower, RED_NER_SHOOT, RED_NER_INTAKE_PRE_3),
                         new WaitCommand(300),
-                        new DrivePointToPoint(follower, RED_NER_INTAKE_PRE_3, RED_NER_INTAKE_3),
-                        new WaitCommand(1000),
+                        new InstantCommand(() -> robot.shooter.triggerFire()),
+                        new WaitCommand(1100),
+                        new InstantCommand(() -> robot.shooter.shooterStop()),
                         new InstantCommand(() -> robot.shooter.triggerHold()),
 
+                        // 收集第三组球
+                        new DrivePointToPoint(follower, RED_NER_SHOOT, RED_NER_INTAKE_PRE_3),
+                        new DrivePointToPoint(follower, RED_NER_INTAKE_PRE_3, RED_NER_INTAKE_3),
+                        new WaitCommand(300),
+
                         // 发射第三组球
+                        new InstantCommand(() -> robot.shooter.setShooterVelocity(SHOOT_VELOCITY_NER_1)),
                         new DrivePointToPoint(follower, RED_NER_INTAKE_3, RED_NER_SHOOT),
                         new InstantCommand(() -> robot.shooter.triggerPut()),
-                        new WaitCommand(200),
-                        new InstantCommand(() -> robot.shooter.setShooterVelocity(SHOOT_VELOCITY_NER_1)),
-                        new WaitCommand(500),
+                        new WaitCommand(300),
                         new InstantCommand(() -> robot.shooter.triggerFire()),
-                        new WaitCommand(1200),
+                        new WaitCommand(1100),
                         new InstantCommand(() -> robot.shooter.shooterStop()),
                         new InstantCommand(() -> robot.shooter.triggerHold()),
 

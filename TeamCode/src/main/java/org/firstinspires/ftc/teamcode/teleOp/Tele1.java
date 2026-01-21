@@ -15,7 +15,6 @@ public class Tele1 extends LinearOpMode {
     Robot robot = new Robot();
     boolean shooterOn = false;
     double velocity = 2000, panel = 0;
-    double targetX = 136.5, targetY = 138;
     double distance;
     int turretTargetHeading = 0;
     double targetATAN, turretCurrentHeading;
@@ -24,8 +23,6 @@ public class Tele1 extends LinearOpMode {
     public void runOpMode() {
         robot.init(hardwareMap);
         robot.drivetrain.pinPoint.setPosition(new Pose2D(DistanceUnit.INCH, autoEndY, 144 - autoEndX, AngleUnit.RADIANS, autoEndH + Math.PI / 2.0));
-        targetX = teleOpTargetX;
-        targetY = teleOpTargetY;
 
         waitForStart();
 
@@ -34,13 +31,13 @@ public class Tele1 extends LinearOpMode {
         while (opModeIsActive()) {
             Pose2D current = robot.drivetrain.getPosition();
             turretCurrentHeading = current.getHeading(AngleUnit.DEGREES);
-            targetATAN = Math.toDegrees(Math.atan2((targetY - current.getY(DistanceUnit.INCH)), (targetX - current.getX(DistanceUnit.INCH))));
+            targetATAN = Math.toDegrees(Math.atan2((teleOpTargetY - current.getY(DistanceUnit.INCH)), (teleOpTargetX - current.getX(DistanceUnit.INCH))));
             if (Math.abs(targetATAN - turretCurrentHeading) <= 90) {
                 turretTargetHeading = (int) -(targetATAN - turretCurrentHeading);
             } else {
                 turretTargetHeading = 0;
             }
-            distance = Math.abs(Math.hypot(targetY - current.getY(DistanceUnit.INCH), targetX - current.getX(DistanceUnit.INCH)));
+            distance = Math.abs(Math.hypot(teleOpTargetY - current.getY(DistanceUnit.INCH), teleOpTargetX - current.getX(DistanceUnit.INCH)));
 
             robot.drivetrain.driveConstantOriented(gamepad1, gamepad1.dpad_left);
 

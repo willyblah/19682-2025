@@ -71,33 +71,28 @@ public class AutoRedFar extends OpMode {
         // 使用命令调度器安排一系列顺序执行的命令组
         CommandScheduler.getInstance().schedule(
                 new SequentialCommandGroup(
-                        new ParallelCommandGroup(
-                                new DrivePointToPoint(follower, RED_FAR_START, RED_FAR_SHOOT),
-                                new InstantCommand(() -> robot.intake.intakeIn())
-                        ),
-
-                        new InstantCommand(() -> robot.shooter.triggerPut()),
+                        new InstantCommand(() -> robot.shooter.setShooterVelocity(SHOOT_VELOCITY_NER_1)),
+                        new DrivePointToPoint(follower, RED_NER_START, RED_NER_SHOOT),
+                        new InstantCommand(() -> robot.intake.intakeIn()),
                         new WaitCommand(300),
+                        new InstantCommand(() -> robot.shooter.triggerPut()),
+                        new WaitCommand(200),
                         new InstantCommand(() -> robot.shooter.triggerFire()),
-                        new WaitCommand(1500),
+                        new WaitCommand(1100),
                         new InstantCommand(() -> robot.shooter.shooterStop()),
+                        new InstantCommand(() -> robot.shooter.triggerHold()),
 
                         // 第一次
-                        new InstantCommand(() -> robot.intake.intakeIn()),
-                        new InstantCommand(() -> robot.shooter.setTriggerMotor()),
-                        new InstantCommand(() -> robot.shooter.setTriggerServo()),
                         new DrivePointToPoint(follower, RED_FAR_SHOOT, RED_FAR_INTAKE_1),
                         new WaitCommand(400),
                         new DrivePointToPoint(follower, RED_FAR_INTAKE_1, RED_FAR_INTAKE_2),
                         new DrivePointToPoint(follower, RED_FAR_INTAKE_2, RED_FAR_INTAKE_3),
                         new WaitCommand(400),
-                        new InstantCommand(() -> robot.shooter.triggerHold()),
 
+                        new InstantCommand(() -> robot.shooter.setShooterVelocity(SHOOT_VELOCITY_FAR)),
                         new DrivePointToPoint(follower, RED_FAR_INTAKE_3, RED_FAR_SHOOT),
                         new InstantCommand(() -> robot.shooter.triggerPut()),
-                        new WaitCommand(200),
-                        new InstantCommand(() -> robot.shooter.setShooterVelocity(SHOOT_VELOCITY_FAR)),
-                        new WaitCommand(500),
+                        new WaitCommand(300),
                         new InstantCommand(() -> robot.shooter.triggerFire()),
                         new WaitCommand(1500),
                         new InstantCommand(() -> robot.shooter.shooterStop()),
@@ -106,27 +101,22 @@ public class AutoRedFar extends OpMode {
                         new WaitCommand(5000),
 
                         // 第二次
-                        new InstantCommand(() -> robot.intake.intakeIn()),
-                        new InstantCommand(() -> robot.shooter.setTriggerMotor()),
-                        new InstantCommand(() -> robot.shooter.setTriggerServo()),
                         new DrivePointToPoint(follower, RED_FAR_SHOOT, RED_FAR_INTAKE_1),
                         new WaitCommand(400),
                         new DrivePointToPoint(follower, RED_FAR_INTAKE_1, RED_FAR_INTAKE_2),
                         new DrivePointToPoint(follower, RED_FAR_INTAKE_2, RED_FAR_INTAKE_3),
                         new WaitCommand(400),
-                        new InstantCommand(() -> robot.shooter.triggerHold()),
 
+                        new InstantCommand(() -> robot.shooter.setShooterVelocity(SHOOT_VELOCITY_FAR)),
                         new DrivePointToPoint(follower, RED_FAR_INTAKE_3, RED_FAR_SHOOT),
                         new InstantCommand(() -> robot.shooter.triggerPut()),
-                        new WaitCommand(200),
-                        new InstantCommand(() -> robot.shooter.setShooterVelocity(SHOOT_VELOCITY_FAR)),
-                        new WaitCommand(500),
+                        new WaitCommand(300),
                         new InstantCommand(() -> robot.shooter.triggerFire()),
                         new WaitCommand(1500),
                         new InstantCommand(() -> robot.shooter.shooterStop()),
                         new InstantCommand(() -> robot.shooter.triggerHold()),
 
-                        // 移动到停车位置
+                        new InstantCommand(() -> robot.intake.intakeStop()),
                         new DrivePointToPoint(follower, RED_FAR_SHOOT, RED_FAR_PARK),
                         new InstantCommand(this::stop)
                 )

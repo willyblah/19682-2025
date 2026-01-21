@@ -59,7 +59,7 @@ public class Shooter {
     }
 
     public void setTriggerMotor() {
-        triggerMotor.setPower(1);
+        triggerMotor.setPower(0.8);
     }
 
     public void setTriggerServo() {

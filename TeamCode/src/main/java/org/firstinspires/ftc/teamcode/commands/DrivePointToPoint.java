@@ -10,20 +10,10 @@ import org.firstinspires.ftc.teamcode.subsystems.Follower;
 
 public class DrivePointToPoint extends CommandBase {
     private Follower follower;
-    private Pose originalPos, targetPos, midPos1, midPos2, midPos3;
+    private Pose originalPos, targetPos, midPos1, midPos2;
     private int numberOfPoints;
     private boolean holdEnd = false;
     private double breaking = 1.0;
-
-    public DrivePointToPoint(Follower follower, Pose start, Pose mid1, Pose mid2, Pose mid3, Pose end) {
-        originalPos = new Pose(start.getX(), start.getY(), start.getHeading());
-        targetPos = new Pose(end.getX(), end.getY(), end.getHeading());
-        midPos1 = new Pose(mid1.getX(), mid1.getY());
-        midPos2 = new Pose(mid2.getX(), mid2.getY());
-        midPos3 = new Pose(mid3.getX(), mid3.getY());
-        this.follower = follower;
-        numberOfPoints = 5;
-    }
 
     public DrivePointToPoint(Follower follower, Pose start, Pose mid1, Pose mid2, Pose end) {
         originalPos = new Pose(start.getX(), start.getY(), start.getHeading());
@@ -63,19 +53,7 @@ public class DrivePointToPoint extends CommandBase {
     public void initialize() {
         this.follower.breakFollowing();
         PathBuilder builder = new PathBuilder(this.follower.follower);
-        if (numberOfPoints == 5) {
-            builder.addPath(
-                            new BezierCurve(
-                                    new Pose(originalPos.getX(), originalPos.getY()),
-                                    new Pose(midPos1.getX(), midPos1.getY()),
-                                    new Pose(midPos2.getX(), midPos2.getY()),
-                                    new Pose(midPos3.getX(), midPos3.getY()),
-                                    new Pose(targetPos.getX(), targetPos.getY())
-                            )
-                    )
-                    .setLinearHeadingInterpolation(originalPos.getHeading(), targetPos.getHeading())
-                    .setBrakingStrength(this.breaking);
-        } else if (numberOfPoints == 4) {
+        if (numberOfPoints == 4) {
             builder.addPath(
                             new BezierCurve(
                                     new Pose(originalPos.getX(), originalPos.getY()),

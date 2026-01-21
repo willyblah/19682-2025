@@ -8,7 +8,7 @@ public class RobotConstants {
     public static volatile double autoEndY = 72;
     public static volatile double autoEndH = Math.PI / 2.0;
 
-    public static int SHOOT_VELOCITY_NER_1 = 1700;
+    public static int SHOOT_VELOCITY_NER_1 = 1900;
     public static int SHOOT_VELOCITY_NER_2 = 2250;
     public static int SHOOT_VELOCITY_FAR = 2900;
 
