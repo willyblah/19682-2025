@@ -84,7 +84,7 @@ public class AutoRedNear extends OpMode {
                         // 收集第一组球
                         new DrivePointToPoint(follower, RED_NER_SHOOT, RED_NER_INTAKE_PRE_1),
                         new DrivePointToPoint(follower, RED_NER_INTAKE_PRE_1, RED_NER_INTAKE_1),
-                        new WaitCommand(300),
+                        new WaitCommand(200),
 
                         // 发射第一组球
                         new InstantCommand(() -> robot.shooter.setShooterVelocity(SHOOT_VELOCITY_NER_1)),
@@ -96,14 +96,18 @@ public class AutoRedNear extends OpMode {
                         new InstantCommand(() -> robot.shooter.shooterStop()),
                         new InstantCommand(() -> robot.shooter.triggerHold()),
 
-                        // 收集第二组球
-                        new DrivePointToPoint(follower, RED_NER_SHOOT, RED_NER_INTAKE_PRE_2),
-                        new DrivePointToPoint(follower, RED_NER_INTAKE_PRE_2, RED_NER_INTAKE_2),
+                        // 开闸
+                        new DrivePointToPoint(follower, RED_NER_SHOOT, RED_NER_GATE),
                         new WaitCommand(300),
+
+                        // 收集第二组球
+                        new DrivePointToPoint(follower, RED_NER_GATE, RED_NER_INTAKE_MID_2, RED_NER_INTAKE_PRE_2),
+                        new DrivePointToPoint(follower, RED_NER_INTAKE_PRE_2, RED_NER_INTAKE_2),
+                        new WaitCommand(200),
 
                         // 发射第二组球
                         new InstantCommand(() -> robot.shooter.setShooterVelocity(SHOOT_VELOCITY_NER_1)),
-                        new DrivePointToPoint(follower, RED_NER_INTAKE_2, RED_NER_SHOOT),
+                        new DrivePointToPoint(follower, RED_NER_INTAKE_2, RED_NER_SHOOT_MID, RED_NER_SHOOT),
                         new InstantCommand(() -> robot.shooter.triggerPut()),
                         new WaitCommand(300),
                         new InstantCommand(() -> robot.shooter.triggerFire()),
@@ -114,7 +118,7 @@ public class AutoRedNear extends OpMode {
                         // 收集第三组球
                         new DrivePointToPoint(follower, RED_NER_SHOOT, RED_NER_INTAKE_PRE_3),
                         new DrivePointToPoint(follower, RED_NER_INTAKE_PRE_3, RED_NER_INTAKE_3),
-                        new WaitCommand(300),
+                        new WaitCommand(200),
 
                         // 发射第三组球
                         new InstantCommand(() -> robot.shooter.setShooterVelocity(SHOOT_VELOCITY_NER_1)),

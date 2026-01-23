@@ -5,7 +5,6 @@ import static org.firstinspires.ftc.teamcode.constants.RobotConstants.*;
 
 import com.arcrobotics.ftclib.command.CommandScheduler;
 import com.arcrobotics.ftclib.command.InstantCommand;
-import com.arcrobotics.ftclib.command.ParallelCommandGroup;
 import com.arcrobotics.ftclib.command.SequentialCommandGroup;
 import com.arcrobotics.ftclib.command.WaitCommand;
 import com.bylazar.configurables.annotations.IgnoreConfigurable;
@@ -65,14 +64,13 @@ public class AutoRedFar extends OpMode {
 
     @Override
     public void start() {
-        robot.shooter.setShooterVelocity(SHOOT_VELOCITY_FAR);
         // 激活所有PIDF控制器
         follower.follower.activateAllPIDFs();
         // 使用命令调度器安排一系列顺序执行的命令组
         CommandScheduler.getInstance().schedule(
                 new SequentialCommandGroup(
-                        new InstantCommand(() -> robot.shooter.setShooterVelocity(SHOOT_VELOCITY_NER_1)),
-                        new DrivePointToPoint(follower, RED_NER_START, RED_NER_SHOOT),
+                        new InstantCommand(() -> robot.shooter.setShooterVelocity(SHOOT_VELOCITY_FAR)),
+                        new DrivePointToPoint(follower, RED_FAR_START, RED_FAR_SHOOT),
                         new InstantCommand(() -> robot.intake.intakeIn()),
                         new WaitCommand(300),
                         new InstantCommand(() -> robot.shooter.triggerPut()),
