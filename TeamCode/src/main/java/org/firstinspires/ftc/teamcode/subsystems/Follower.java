@@ -34,12 +34,8 @@ public class Follower extends SubsystemBase {
         telemetry.addData("heading", Math.toDegrees(follower.getPose().getHeading()));
     }
 
-    public void followPath(Path path, boolean holdEnd) {
-        follower.followPath(path, holdEnd);
-    }
-
-    public void followPath(PathChain path, boolean holdEnd) {
-        follower.followPath(path, holdEnd);
+    public void followPath(PathChain path, double power, boolean holdEnd) {
+        follower.followPath(path, power, holdEnd);
     }
 
     public void setStartingPose(Pose a) {

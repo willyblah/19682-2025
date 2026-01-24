@@ -87,6 +87,10 @@ public class Shooter {
         triggerServo.setPower(1);
     }
 
+    public void reverseTriggerServo() {
+        triggerServo.setPower(-1);
+    }
+
     public void panelTo(double pos) {
         shooterPanel.setPosition(pos);
     }

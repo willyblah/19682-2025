@@ -12,7 +12,7 @@ public class RobotConstants {
     public static int SHOOT_VELOCITY_NER_2 = 2250;
     public static int SHOOT_VELOCITY_FAR = 2800;
 
-    public static double PANEL_NER_1 = 0.642;
-    public static double PANEL_NER_2 = 0.7;
+    public static double PANEL_NER_1 = 0.64;
+    public static double PANEL_NER_2 = 0.85;
     public static double PANEL_FAR = 0.94;
 }

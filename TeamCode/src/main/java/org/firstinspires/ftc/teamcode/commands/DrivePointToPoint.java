@@ -13,7 +13,7 @@ public class DrivePointToPoint extends CommandBase {
     private Pose originalPos, targetPos, midPos1, midPos2;
     private int numberOfPoints;
     private boolean holdEnd = false;
-    private double breaking = 1.0;
+    private double breaking = 1.0, power = 1.0;
 
     public DrivePointToPoint(Follower follower, Pose start, Pose mid1, Pose mid2, Pose end) {
         originalPos = new Pose(start.getX(), start.getY(), start.getHeading());
@@ -21,6 +21,7 @@ public class DrivePointToPoint extends CommandBase {
         midPos1 = new Pose(mid1.getX(), mid1.getY());
         midPos2 = new Pose(mid2.getX(), mid2.getY());
         this.follower = follower;
+        this.power = 1.0;
         numberOfPoints = 4;
     }
 
@@ -29,6 +30,7 @@ public class DrivePointToPoint extends CommandBase {
         targetPos = new Pose(end.getX(), end.getY(), end.getHeading());
         midPos1 = new Pose(mid1.getX(), mid1.getY());
         this.follower = follower;
+        this.power = 1.0;
         numberOfPoints = 3;
     }
 
@@ -36,6 +38,15 @@ public class DrivePointToPoint extends CommandBase {
         originalPos = new Pose(start.getX(), start.getY(), start.getHeading());
         targetPos = new Pose(end.getX(), end.getY(), end.getHeading());
         this.follower = follower;
+        this.power = 1.0;
+        numberOfPoints = 2;
+    }
+
+    public DrivePointToPoint(Follower follower, Pose start, Pose end, double power) {
+        originalPos = new Pose(start.getX(), start.getY(), start.getHeading());
+        targetPos = new Pose(end.getX(), end.getY(), end.getHeading());
+        this.follower = follower;
+        this.power = power;
         numberOfPoints = 2;
     }
 
@@ -85,7 +96,7 @@ public class DrivePointToPoint extends CommandBase {
                     .setBrakingStrength(this.breaking);
         }
         this.follower.breakFollowing();
-        this.follower.followPath(builder.build(), this.holdEnd);
+        this.follower.followPath(builder.build(), this.power, this.holdEnd);
     }
 
     @Override

@@ -5,7 +5,6 @@ import static org.firstinspires.ftc.teamcode.constants.RobotConstants.*;
 
 import com.arcrobotics.ftclib.command.CommandScheduler;
 import com.arcrobotics.ftclib.command.InstantCommand;
-import com.arcrobotics.ftclib.command.ParallelCommandGroup;
 import com.arcrobotics.ftclib.command.SequentialCommandGroup;
 import com.arcrobotics.ftclib.command.WaitCommand;
 import com.bylazar.configurables.annotations.IgnoreConfigurable;
@@ -65,68 +64,79 @@ public class AutoBlueFar extends OpMode {
 
     @Override
     public void start() {
-        robot.shooter.setShooterVelocity(SHOOT_VELOCITY_FAR);
         // 激活所有PIDF控制器
         follower.follower.activateAllPIDFs();
         // 使用命令调度器安排一系列顺序执行的命令组
         CommandScheduler.getInstance().schedule(
                 new SequentialCommandGroup(
-                        new ParallelCommandGroup(
-                                new DrivePointToPoint(follower, BLUE_FAR_START, BLUE_FAR_SHOOT),
-                                new InstantCommand(() -> robot.intake.intakeIn())
-                        ),
-
+                        new InstantCommand(() -> robot.shooter.setShooterVelocity(SHOOT_VELOCITY_FAR)),
+                        new DrivePointToPoint(follower, BLUE_FAR_START, BLUE_FAR_SHOOT),
+                        new InstantCommand(() -> robot.intake.intakeIn()),
+                        new WaitCommand(500),
                         new InstantCommand(() -> robot.shooter.triggerPut()),
-                        new WaitCommand(300),
+                        new WaitCommand(200),
+                        new InstantCommand(() -> robot.shooter.triggerHold()),
+                        new WaitCommand(200),
+                        new InstantCommand(() -> robot.shooter.openGate()),
+                        new WaitCommand(100),
                         new InstantCommand(() -> robot.shooter.triggerFire()),
                         new WaitCommand(1500),
                         new InstantCommand(() -> robot.shooter.shooterStop()),
+                        new InstantCommand(() -> robot.shooter.triggerHold()),
 
                         // 第一次
-                        new InstantCommand(() -> robot.intake.intakeIn()),
                         new InstantCommand(() -> robot.shooter.setTriggerMotor()),
                         new InstantCommand(() -> robot.shooter.setTriggerServo()),
-                        new DrivePointToPoint(follower, BLUE_FAR_SHOOT, BLUE_FAR_INTAKE_1),
+                        new DrivePointToPoint(follower, BLUE_FAR_SHOOT, BLUE_FAR_INTAKE_3),
                         new WaitCommand(400),
-                        new DrivePointToPoint(follower, BLUE_FAR_INTAKE_1, BLUE_FAR_INTAKE_2),
-                        new DrivePointToPoint(follower, BLUE_FAR_INTAKE_2, BLUE_FAR_INTAKE_3),
+                        new DrivePointToPoint(follower, BLUE_FAR_INTAKE_3, BLUE_FAR_INTAKE_2),
+                        new DrivePointToPoint(follower, BLUE_FAR_INTAKE_2, BLUE_FAR_INTAKE_1),
                         new WaitCommand(400),
-                        new InstantCommand(() -> robot.shooter.triggerHold()),
 
                         new DrivePointToPoint(follower, BLUE_FAR_INTAKE_3, BLUE_FAR_SHOOT),
                         new InstantCommand(() -> robot.shooter.triggerPut()),
                         new WaitCommand(200),
                         new InstantCommand(() -> robot.shooter.setShooterVelocity(SHOOT_VELOCITY_FAR)),
                         new WaitCommand(500),
+                        new InstantCommand(() -> robot.shooter.triggerPut()),
+                        new WaitCommand(200),
+                        new InstantCommand(() -> robot.shooter.triggerHold()),
+                        new WaitCommand(200),
+                        new InstantCommand(() -> robot.shooter.openGate()),
+                        new WaitCommand(100),
                         new InstantCommand(() -> robot.shooter.triggerFire()),
-                        new WaitCommand(1500),
+                        new WaitCommand(2000),
                         new InstantCommand(() -> robot.shooter.shooterStop()),
                         new InstantCommand(() -> robot.shooter.triggerHold()),
 
-                        new WaitCommand(5000),
+                        new WaitCommand(3000),
 
                         // 第二次
-                        new InstantCommand(() -> robot.intake.intakeIn()),
                         new InstantCommand(() -> robot.shooter.setTriggerMotor()),
                         new InstantCommand(() -> robot.shooter.setTriggerServo()),
-                        new DrivePointToPoint(follower, BLUE_FAR_SHOOT, BLUE_FAR_INTAKE_1),
+                        new DrivePointToPoint(follower, BLUE_FAR_SHOOT, BLUE_FAR_INTAKE_3),
                         new WaitCommand(400),
-                        new DrivePointToPoint(follower, BLUE_FAR_INTAKE_1, BLUE_FAR_INTAKE_2),
-                        new DrivePointToPoint(follower, BLUE_FAR_INTAKE_2, BLUE_FAR_INTAKE_3),
+                        new DrivePointToPoint(follower, BLUE_FAR_INTAKE_3, BLUE_FAR_INTAKE_2),
+                        new DrivePointToPoint(follower, BLUE_FAR_INTAKE_2, BLUE_FAR_INTAKE_1),
                         new WaitCommand(400),
-                        new InstantCommand(() -> robot.shooter.triggerHold()),
 
                         new DrivePointToPoint(follower, BLUE_FAR_INTAKE_3, BLUE_FAR_SHOOT),
                         new InstantCommand(() -> robot.shooter.triggerPut()),
                         new WaitCommand(200),
                         new InstantCommand(() -> robot.shooter.setShooterVelocity(SHOOT_VELOCITY_FAR)),
                         new WaitCommand(500),
+                        new InstantCommand(() -> robot.shooter.triggerPut()),
+                        new WaitCommand(200),
+                        new InstantCommand(() -> robot.shooter.triggerHold()),
+                        new WaitCommand(200),
+                        new InstantCommand(() -> robot.shooter.openGate()),
+                        new WaitCommand(100),
                         new InstantCommand(() -> robot.shooter.triggerFire()),
-                        new WaitCommand(1500),
+                        new WaitCommand(2000),
                         new InstantCommand(() -> robot.shooter.shooterStop()),
                         new InstantCommand(() -> robot.shooter.triggerHold()),
 
-                        // 移动到停车位置
+                        new InstantCommand(() -> robot.intake.intakeStop()),
                         new DrivePointToPoint(follower, BLUE_FAR_SHOOT, BLUE_FAR_PARK),
                         new InstantCommand(this::stop)
                 )
