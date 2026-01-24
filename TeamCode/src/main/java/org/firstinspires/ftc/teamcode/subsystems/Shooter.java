@@ -11,10 +11,10 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 public class Shooter {
     public DcMotorEx leftShooter, rightShooter;
-    DcMotorEx triggerMotor;
-    CRServo triggerServo;
-    Servo shooterPanel;
-    Servo leftGate, rightGate;
+    private DcMotorEx triggerMotor;
+    private CRServo triggerServo;
+    private Servo shooterPanel;
+    private Servo leftGate, rightGate;
 
     public void init(HardwareMap hardwareMap) {
         leftShooter = hardwareMap.get(DcMotorEx.class, LEFT_SHOOTER);
@@ -80,7 +80,7 @@ public class Shooter {
     }
 
     public void setTriggerMotor() {
-        triggerMotor.setPower(0.8);
+        triggerMotor.setPower(1);
     }
 
     public void setTriggerServo() {

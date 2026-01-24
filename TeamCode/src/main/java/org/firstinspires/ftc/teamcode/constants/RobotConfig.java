@@ -11,8 +11,6 @@ public class RobotConfig {
     public static final String LEFT_SHOOTER = "ls";
     public static final String RIGHT_SHOOTER = "rs";
     public static final String INTAKE = "intake";
-    public static final String INTAKE_SERVO_LEFT = "lintake";
-    public static final String INTAKE_SERVO_RIGHT = "rintake";
 
     public static final String TRIGGER_SERVO = "ts";
     public static final String TRIGGER_MOTOR = "tm";
