@@ -10,7 +10,7 @@ import org.firstinspires.ftc.teamcode.subsystems.Robot;
 @TeleOp
 public class AB_Tele extends LinearOpMode {
     Robot robot = new Robot();
-    boolean shooterOn = false;
+    boolean shooterOn = true;
     double velocity = SHOOT_VELOCITY_NER_1, panel = PANEL_NER_1;
 
     @Override
@@ -59,8 +59,8 @@ public class AB_Tele extends LinearOpMode {
                 robot.shooter.triggerHold();
             }
 
-            telemetry.addData("target velocity", velocity);
             telemetry.addData("panel", panel);
+            telemetry.addData("target velocity", velocity);
             telemetry.addData("left velocity", robot.shooter.getLeftVelocity());
             telemetry.addData("right velocity", robot.shooter.getRightVelocity());
             telemetry.update();
