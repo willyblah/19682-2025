@@ -17,4 +17,6 @@ public class RobotConfig {
     public static final String TRIGGER_SERVO = "ts";
     public static final String TRIGGER_MOTOR = "tm";
     public static final String SHOOTER_PANEL = "panel";
+    public static final String LEFT_GATE = "lg";
+    public static final String RIGHT_GATE = "rg";
 }

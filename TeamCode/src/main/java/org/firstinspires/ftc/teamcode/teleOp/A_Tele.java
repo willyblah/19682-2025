@@ -11,10 +11,10 @@ import org.firstinspires.ftc.robotcore.external.navigation.Pose2D;
 import org.firstinspires.ftc.teamcode.subsystems.Robot;
 
 @TeleOp
-public class Tele1 extends LinearOpMode {
+public class A_Tele extends LinearOpMode {
     Robot robot = new Robot();
     boolean shooterOn = false;
-    double velocity = 2000, panel = 0;
+    double velocity = SHOOT_VELOCITY_NER_1, panel = PANEL_NER_1;
     double distance;
     int turretTargetHeading = 0;
     double targetATAN, turretCurrentHeading;
@@ -77,17 +77,15 @@ public class Tele1 extends LinearOpMode {
             if (gamepad1.right_bumper) {
                 robot.intake.intakeIn();
                 robot.shooter.triggerFire();
-            } else if (gamepad1.a) {
-                robot.shooter.triggerPut();
-                robot.intake.intakeIn();
             } else {
                 robot.intake.intakeStop();
                 robot.shooter.triggerHold();
             }
 
             telemetry.addData("target velocity", velocity);
-            telemetry.addData("current velocity", robot.shooter.getShooterVelocity());
             telemetry.addData("panel", panel);
+            telemetry.addData("left velocity", robot.shooter.getLeftVelocity());
+            telemetry.addData("right velocity", robot.shooter.getRightVelocity());
             telemetry.addData("distance", distance);
             telemetry.addData("targetATAN", targetATAN);
             telemetry.addData("turretCurrentHeading", turretCurrentHeading);

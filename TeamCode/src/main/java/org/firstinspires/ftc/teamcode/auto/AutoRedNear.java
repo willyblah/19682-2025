@@ -96,18 +96,14 @@ public class AutoRedNear extends OpMode {
                         new InstantCommand(() -> robot.shooter.shooterStop()),
                         new InstantCommand(() -> robot.shooter.triggerHold()),
 
-                        // 开闸
-                        new DrivePointToPoint(follower, RED_NER_SHOOT, RED_NER_GATE),
-                        new WaitCommand(300),
-
                         // 收集第二组球
-                        new DrivePointToPoint(follower, RED_NER_GATE, RED_NER_INTAKE_MID_2, RED_NER_INTAKE_PRE_2),
+                        new DrivePointToPoint(follower, RED_NER_SHOOT, RED_NER_INTAKE_PRE_2),
                         new DrivePointToPoint(follower, RED_NER_INTAKE_PRE_2, RED_NER_INTAKE_2),
                         new WaitCommand(200),
 
                         // 发射第二组球
                         new InstantCommand(() -> robot.shooter.setShooterVelocity(SHOOT_VELOCITY_NER_1)),
-                        new DrivePointToPoint(follower, RED_NER_INTAKE_2, RED_NER_SHOOT_MID, RED_NER_SHOOT),
+                        new DrivePointToPoint(follower, RED_NER_INTAKE_2, RED_NER_SHOOT),
                         new InstantCommand(() -> robot.shooter.triggerPut()),
                         new WaitCommand(300),
                         new InstantCommand(() -> robot.shooter.triggerFire()),

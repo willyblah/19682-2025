@@ -8,10 +8,10 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.teamcode.subsystems.Robot;
 
 @TeleOp
-public class Tele2 extends LinearOpMode {
+public class AB_Tele extends LinearOpMode {
     Robot robot = new Robot();
     boolean shooterOn = false;
-    double velocity = 2000, panel = 0;
+    double velocity = SHOOT_VELOCITY_NER_1, panel = PANEL_NER_1;
 
     @Override
     public void runOpMode() {
@@ -54,17 +54,15 @@ public class Tele2 extends LinearOpMode {
             if (gamepad2.right_bumper) {
                 robot.intake.intakeIn();
                 robot.shooter.triggerFire();
-            } else if (gamepad2.a) {
-                robot.shooter.triggerPut();
-                robot.intake.intakeIn();
             } else {
                 robot.intake.intakeStop();
                 robot.shooter.triggerHold();
             }
 
             telemetry.addData("target velocity", velocity);
-            telemetry.addData("current velocity", robot.shooter.getShooterVelocity());
             telemetry.addData("panel", panel);
+            telemetry.addData("left velocity", robot.shooter.getLeftVelocity());
+            telemetry.addData("right velocity", robot.shooter.getRightVelocity());
             telemetry.update();
         }
     }

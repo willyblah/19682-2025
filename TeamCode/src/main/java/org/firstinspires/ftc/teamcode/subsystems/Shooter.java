@@ -14,6 +14,7 @@ public class Shooter {
     DcMotorEx triggerMotor;
     CRServo triggerServo;
     Servo shooterPanel;
+    Servo leftGate, rightGate;
 
     public void init(HardwareMap hardwareMap) {
         leftShooter = hardwareMap.get(DcMotorEx.class, LEFT_SHOOTER);
@@ -22,6 +23,10 @@ public class Shooter {
 
         shooterPanel = hardwareMap.get(Servo.class, SHOOTER_PANEL);
         triggerServo = hardwareMap.get(CRServo.class, TRIGGER_SERVO);
+
+        leftGate = hardwareMap.get(Servo.class, LEFT_GATE);
+        rightGate = hardwareMap.get(Servo.class, RIGHT_GATE);
+        leftGate.setDirection(Servo.Direction.REVERSE);
 
         leftShooter.setDirection(DcMotorSimple.Direction.REVERSE);
 
@@ -34,8 +39,12 @@ public class Shooter {
         rightShooter.setVelocity(velocity);
     }
 
-    public double getShooterVelocity() {
-        return (leftShooter.getVelocity() + rightShooter.getVelocity()) / 2.0;
+    public double getLeftVelocity() {
+        return leftShooter.getVelocity();
+    }
+
+    public double getRightVelocity() {
+        return rightShooter.getVelocity();
     }
 
     public void shooterStop() {
@@ -43,9 +52,20 @@ public class Shooter {
         rightShooter.setPower(0);
     }
 
+    public void closeGate() {
+        leftGate.setPosition(0.31);
+        rightGate.setPosition(0.39);
+    }
+
+    public void openGate() {
+        leftGate.setPosition(0.48);
+        rightGate.setPosition(0.55);
+    }
+
     public void triggerFire() {
         triggerServo.setPower(-1);
         triggerMotor.setPower(1);
+        openGate();
     }
 
     public void triggerPut() {
@@ -56,6 +76,7 @@ public class Shooter {
     public void triggerHold() {
         triggerServo.setPower(0);
         triggerMotor.setPower(0);
+        closeGate();
     }
 
     public void setTriggerMotor() {
