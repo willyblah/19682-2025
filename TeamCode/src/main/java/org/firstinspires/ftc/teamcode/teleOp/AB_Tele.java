@@ -21,9 +21,10 @@ public class AB_Tele extends LinearOpMode {
         while (opModeIsActive()) {
             robot.drivetrain.driveCenter(gamepad1, 1);
 
-            if (gamepad1.right_trigger > 0) {
+            if (gamepad1.right_trigger > 0.2) {
+                robot.shooter.reverseTriggerServo();
                 robot.intake.intakeIn();
-            } else if (gamepad1.left_trigger > 0) {
+            } else if (gamepad1.left_trigger > 0.2) {
                 robot.intake.intakeOut();
             } else {
                 robot.intake.intakeStop();
