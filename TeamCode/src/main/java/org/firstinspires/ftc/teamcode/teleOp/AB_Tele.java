@@ -12,6 +12,7 @@ public class AB_Tele extends LinearOpMode {
     Robot robot = new Robot();
     boolean shooterOn = true;
     double velocity = SHOOT_VELOCITY_NER_1, panel = PANEL_NER_1;
+    boolean rumbled = false;
 
     @Override
     public void runOpMode() {
@@ -19,6 +20,11 @@ public class AB_Tele extends LinearOpMode {
 
         waitForStart();
         while (opModeIsActive()) {
+            if (getRuntime() >= 90.0 && !rumbled) {
+                gamepad1.rumble(500);
+                rumbled = true;
+            }
+
             robot.drivetrain.driveCenter(gamepad1, 1);
 
             if (gamepad1.right_trigger > 0.2) {
