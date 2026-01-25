@@ -41,9 +41,10 @@ public class A_Tele extends LinearOpMode {
 
             robot.drivetrain.driveConstantOriented(gamepad1, gamepad1.dpad_left);
 
-            if (gamepad1.right_trigger > 0) {
+            if (gamepad1.right_trigger > 0.2) {
+                robot.shooter.reverseTriggerServo();
                 robot.intake.intakeIn();
-            } else if (gamepad1.left_trigger > 0) {
+            } else if (gamepad1.left_trigger > 0.2) {
                 robot.intake.intakeOut();
                 robot.shooter.triggerHold();
             } else {

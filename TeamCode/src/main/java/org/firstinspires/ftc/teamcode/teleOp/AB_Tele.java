@@ -26,8 +26,10 @@ public class AB_Tele extends LinearOpMode {
                 robot.intake.intakeIn();
             } else if (gamepad1.left_trigger > 0.2) {
                 robot.intake.intakeOut();
+                robot.shooter.triggerHold();
             } else {
                 robot.intake.intakeStop();
+                robot.shooter.triggerHold();
             }
 
             if (gamepad2.xWasPressed()) {
