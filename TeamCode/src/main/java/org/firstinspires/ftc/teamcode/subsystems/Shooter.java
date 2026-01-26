@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 import com.qualcomm.robotcore.hardware.Servo;
 
 public class Shooter {
@@ -32,6 +33,8 @@ public class Shooter {
 
         leftShooter.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rightShooter.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//        leftShooter.setVelocityPIDFCoefficients(1, 1, 1, 1);
+//        rightShooter.setVelocityPIDFCoefficients(1, 1, 1, 1);
     }
 
     public void setShooterVelocity(double velocity) {

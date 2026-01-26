@@ -41,24 +41,19 @@ public class A_Tele extends LinearOpMode {
 
             robot.drivetrain.driveConstantOriented(gamepad1, gamepad1.dpad_left);
 
-            if (gamepad1.right_trigger > 0.2) {
+            if (gamepad1.right_trigger > 0.1) {
                 robot.shooter.reverseTriggerServo();
-                robot.intake.intakeIn();
-            } else if (gamepad1.left_trigger > 0.2) {
+                robot.shooter.setTriggerMotor();
+                robot.intake.intakeIn(gamepad1.right_trigger);
+            } else if (gamepad1.left_trigger > 0.1) {
                 robot.intake.intakeOut();
-                robot.shooter.triggerHold();
-            } else {
-                robot.intake.intakeStop();
-                robot.shooter.triggerHold();
+                robot.shooter.triggerPut();
             }
 
-            // 近点 1 位置发射设置
             if (gamepad1.xWasPressed()) {
                 panel = PANEL_NER_1;
                 velocity = SHOOT_VELOCITY_NER_1;
-            }
-            // 近点 2 位置发射设置
-            else if (gamepad1.yWasPressed()) {
+            } else if (gamepad1.yWasPressed()) {
                 panel = PANEL_NER_2;
                 velocity = SHOOT_VELOCITY_NER_2;
             } else if (gamepad1.bWasPressed()) {
@@ -78,7 +73,12 @@ public class A_Tele extends LinearOpMode {
             if (gamepad1.right_bumper) {
                 robot.intake.intakeIn();
                 robot.shooter.triggerFire();
-            } else {
+            } else if (gamepad1.a) {
+                robot.shooter.reverseTriggerServo();
+                robot.intake.intakeIn();
+            }
+
+            if (!gamepad1.a && !gamepad1.right_bumper && !(gamepad1.right_trigger > 0.2)) {
                 robot.intake.intakeStop();
                 robot.shooter.triggerHold();
             }

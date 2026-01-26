@@ -17,6 +17,10 @@ public class Intake {
         intake.setPower(1);
     }
 
+    public void intakeIn(double p) {
+        intake.setPower(p);
+    }
+
     public void intakeOut() {
         intake.setPower(-1);
     }

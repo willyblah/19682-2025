@@ -8,11 +8,10 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.teamcode.subsystems.Robot;
 
 @TeleOp
-public class AB_Tele extends LinearOpMode {
+public class Test extends LinearOpMode {
     Robot robot = new Robot();
     boolean shooterOn = true;
     double velocity = SHOOT_VELOCITY_NER_1, panel = PANEL_NER_1;
-    boolean rumbled = false;
 
     @Override
     public void runOpMode() {
@@ -20,34 +19,29 @@ public class AB_Tele extends LinearOpMode {
 
         waitForStart();
         while (opModeIsActive()) {
-            if (getRuntime() >= 90.0 && !rumbled) {
-                gamepad1.rumble(500);
-                rumbled = true;
-            }
 
-            robot.drivetrain.driveCenter(gamepad1, 1);
-
-            if (gamepad1.right_trigger > 0.1) {
+            if (gamepad1.right_trigger > 0.2) {
                 robot.shooter.reverseTriggerServo();
-                robot.shooter.setTriggerMotor();
-                robot.intake.intakeIn(gamepad1.right_trigger);
-            } else if (gamepad1.left_trigger > 0.1) {
+                robot.intake.intakeIn();
+            } else if (gamepad1.left_trigger > 0.2) {
                 robot.intake.intakeOut();
-                robot.shooter.triggerPut();
+                robot.shooter.triggerHold();
+            } else {
+                robot.intake.intakeStop();
+                robot.shooter.triggerHold();
             }
 
-            if (gamepad2.xWasPressed()) {
-                panel = PANEL_NER_1;
-                velocity = SHOOT_VELOCITY_NER_1;
-            } else if (gamepad2.yWasPressed()) {
-                panel = PANEL_NER_2;
-                velocity = SHOOT_VELOCITY_NER_2;
-            } else if (gamepad2.bWasPressed()) {
-                panel = PANEL_FAR;
-                velocity = SHOOT_VELOCITY_FAR;
+            if (gamepad1.dpadUpWasPressed()) {
+                panel += 0.03;
+            } else if (gamepad1.dpadDownWasPressed()) {
+                panel -= 0.03;
+            } else if (gamepad1.dpadLeftWasPressed()) {
+                velocity -= 50;
+            } else if (gamepad1.dpadRightWasPressed()) {
+                velocity += 50;
             }
 
-            if (gamepad2.leftBumperWasPressed()) {
+            if (gamepad1.leftBumperWasPressed()) {
                 shooterOn = !shooterOn;
             }
             if (shooterOn) {
@@ -58,23 +52,18 @@ public class AB_Tele extends LinearOpMode {
 
             robot.shooter.panelTo(panel);
 
-            if (gamepad2.right_bumper) {
+            if (gamepad1.right_bumper) {
                 robot.intake.intakeIn();
                 robot.shooter.triggerFire();
-            } else if (gamepad2.a) {
-                robot.shooter.reverseTriggerServo();
-                robot.intake.intakeIn();
-            }
-
-            if (!gamepad2.a && !gamepad2.right_bumper && !(gamepad1.right_trigger > 0.2)) {
+            } else {
                 robot.intake.intakeStop();
                 robot.shooter.triggerHold();
             }
 
+            telemetry.addData("panel", panel);
             telemetry.addData("target velocity", velocity);
             telemetry.addData("left velocity", robot.shooter.getLeftVelocity());
             telemetry.addData("right velocity", robot.shooter.getRightVelocity());
-            telemetry.addData("panel", panel);
             telemetry.update();
         }
     }
