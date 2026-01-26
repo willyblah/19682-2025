@@ -24,7 +24,14 @@ public class AutoConstants {
     // 发射位置
     public static Pose RED_NER_SHOOT_1 = new Pose(100, 89, Math.toRadians(145));
     public static Pose RED_NER_SHOOT_2 = new Pose(94, 89, Math.toRadians(135));
-    public static Pose RED_NER_SHOOT_3 = new Pose(76, 73, Math.toRadians(135));
+
+    // 开闸位置
+    public static Pose RED_NER_GATE_MID = new Pose(118, 63);
+    public static Pose RED_NER_GATE = new Pose(130, 70, Math.toRadians(90));
+    public static Pose RED_NER_SUCK_MID = new Pose(120, 63);
+    public static Pose RED_NER_SUCK_1 = new Pose(135, 57, Math.toRadians(110));
+    public static Pose RED_NER_SUCK_2 = new Pose(131, 55, Math.toRadians(110));
+    public static Pose RED_NER_SUCK_3 = new Pose(135, 52, Math.toRadians(110));
 
     // 停车位置
     public static Pose RED_NER_PARK = new Pose(115, 78, Math.toRadians(90));
@@ -42,23 +49,4 @@ public class AutoConstants {
 
     // 远点停车位置
     public static Pose RED_FAR_PARK = new Pose(110, 10, Math.toRadians(180));
-
-
-    public static Pose BLUE_NER_START = RED_NER_START.mirror();
-    public static Pose BLUE_NER_INTAKE_PRE_1 = RED_NER_INTAKE_PRE_1.mirror();
-    public static Pose BLUE_NER_INTAKE_1 = RED_NER_INTAKE_1.mirror();
-    public static Pose BLUE_NER_INTAKE_PRE_2 = RED_NER_INTAKE_PRE_2.mirror();
-    public static Pose BLUE_NER_INTAKE_2 = RED_NER_INTAKE_2.mirror();
-    public static Pose BLUE_NER_INTAKE_PRE_3 = RED_NER_INTAKE_PRE_3.mirror();
-    public static Pose BLUE_NER_INTAKE_3 = RED_NER_INTAKE_3.mirror();
-    public static Pose BLUE_NER_SHOOT_1 = RED_NER_SHOOT_1.mirror();
-    public static Pose BLUE_NER_SHOOT_2 = RED_NER_SHOOT_2.mirror();
-    public static Pose BLUE_NER_SHOOT_3 = RED_NER_SHOOT_3.mirror();
-    public static Pose BLUE_NER_PARK = RED_NER_PARK.mirror();
-    public static Pose BLUE_FAR_START = RED_FAR_START.mirror();
-    public static Pose BLUE_FAR_SHOOT = RED_FAR_SHOOT.mirror();
-    public static Pose BLUE_FAR_INTAKE_1 = RED_FAR_INTAKE_1.mirror();
-    public static Pose BLUE_FAR_INTAKE_2 = RED_FAR_INTAKE_2.mirror();
-    public static Pose BLUE_FAR_INTAKE_3 = RED_FAR_INTAKE_3.mirror();
-    public static Pose BLUE_FAR_PARK = RED_FAR_PARK.mirror();
 }
