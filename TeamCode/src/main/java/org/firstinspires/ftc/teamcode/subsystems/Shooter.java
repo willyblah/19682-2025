@@ -33,6 +33,8 @@ public class Shooter {
 
         leftShooter.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rightShooter.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        leftShooter.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rightShooter.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 //        leftShooter.setVelocityPIDFCoefficients(1, 1, 1, 1);
 //        rightShooter.setVelocityPIDFCoefficients(1, 1, 1, 1);
     }
