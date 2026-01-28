@@ -75,7 +75,7 @@ public class AutoRedFar9 extends OpMode {
                         new WaitCommand(300),
                         new InstantCommand(() -> robot.shooter.triggerPut()),
                         new WaitCommand(200),
-                        new InstantCommand(() -> robot.shooter.slowFire(robot.intake, false)),
+                        new InstantCommand(() -> robot.shooter.slowFire(false)),
                         new WaitCommand(2800),
                         new InstantCommand(() -> robot.shooter.triggerHold()),
 
@@ -91,7 +91,7 @@ public class AutoRedFar9 extends OpMode {
                         new DrivePointToPoint(follower, RED_FAR_INTAKE_3, RED_FAR_SHOOT),
                         new InstantCommand(() -> robot.shooter.openGate()),
                         new WaitCommand(100),
-                        new InstantCommand(() -> robot.shooter.slowFire(robot.intake, false)),
+                        new InstantCommand(() -> robot.shooter.slowFire(false)),
                         new WaitCommand(2800),
                         new InstantCommand(() -> robot.shooter.triggerHold()),
 
@@ -109,7 +109,7 @@ public class AutoRedFar9 extends OpMode {
                         new DrivePointToPoint(follower, RED_FAR_INTAKE_3, RED_FAR_SHOOT),
                         new InstantCommand(() -> robot.shooter.openGate()),
                         new WaitCommand(100),
-                        new InstantCommand(() -> robot.shooter.slowFire(robot.intake, false)),
+                        new InstantCommand(() -> robot.shooter.slowFire(false)),
                         new WaitCommand(2800),
                         new InstantCommand(() -> robot.shooter.shooterStop()),
                         new InstantCommand(() -> robot.shooter.triggerHold()),

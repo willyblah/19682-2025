@@ -67,7 +67,7 @@ public class AB_Tele extends LinearOpMode {
             }
 
             if (gamepad2.dpadRightWasPressed()) {
-                robot.shooter.slowFire(robot.intake, true);
+                robot.shooter.slowFire(true);
             }
 
             if (!gamepad2.a && !gamepad2.right_bumper && gamepad1.right_trigger <= 0.1 && !robot.shooter.busy) {

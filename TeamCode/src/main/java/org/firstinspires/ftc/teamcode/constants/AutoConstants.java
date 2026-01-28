@@ -34,7 +34,7 @@ public class AutoConstants {
     public static Pose RED_NER_SUCK_3 = new Pose(134, 52, Math.toRadians(115));
 
     // 停车位置
-    public static Pose RED_NER_PARK = new Pose(115, 78, Math.toRadians(90));
+    public static Pose RED_NER_PARK = new Pose(115, 78, Math.toRadians(0));
 
     // 远端摆位点
     public static Pose RED_FAR_START = new Pose(88, 7, Math.toRadians(180));
@@ -48,7 +48,7 @@ public class AutoConstants {
     public static Pose RED_FAR_INTAKE_3 = new Pose(133, 11, Math.toRadians(90));
 
     // 远点停车位置
-    public static Pose RED_FAR_PARK = new Pose(110, 10, Math.toRadians(180));
+    public static Pose RED_FAR_PARK = new Pose(110, 10, Math.toRadians(0));
 
 
     public static Pose BLUE_NER_START = new Pose(20.5, 121.5, Math.toRadians(225));
@@ -66,7 +66,7 @@ public class AutoConstants {
     public static Pose BLUE_NER_SUCK_1 = new Pose(10, 57, Math.toRadians(245));
     public static Pose BLUE_NER_SUCK_2 = new Pose(13, 55, Math.toRadians(245));
     public static Pose BLUE_NER_SUCK_3 = new Pose(10, 52, Math.toRadians(245));
-    public static Pose BLUE_NER_PARK = new Pose(29, 78, Math.toRadians(270));
+    public static Pose BLUE_NER_PARK = new Pose(29, 78, Math.toRadians(180));
     public static Pose BLUE_FAR_START = new Pose(56, 7, Math.toRadians(180));
     public static Pose BLUE_FAR_SHOOT = new Pose(60, 20, Math.toRadians(205));
     public static Pose BLUE_FAR_INTAKE_1 = new Pose(11, 7, Math.toRadians(270));

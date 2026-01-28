@@ -22,8 +22,8 @@ public class Shooter {
     private Servo leftGate, rightGate;
     private ScheduledExecutorService exec;
     public boolean busy = false;
-    private static final int SHOOT_TIME = 340;
-    private static final int WAIT_TIME = 320;
+    private static final int SHOOT_TIME = 320;
+    private static final int WAIT_TIME = 300;
 
     public void init(HardwareMap hardwareMap) {
         leftShooter = hardwareMap.get(DcMotorEx.class, LEFT_SHOOTER);
@@ -84,8 +84,8 @@ public class Shooter {
     }
 
     private void triggerFireFar() {
-        triggerServo.setPower(-0.5);
-        triggerMotor.setPower(0.5);
+        triggerServo.setPower(-0.7);
+        triggerMotor.setPower(0.7);
     }
 
     private void triggerHoldFar() {
@@ -93,21 +93,17 @@ public class Shooter {
         triggerMotor.setPower(0);
     }
 
-    public void slowFire(Intake intake, boolean stopIntake) {
+    public void slowFire(boolean stopIntake) {
         busy = true;
         openGate();
-        intake.intakeIn();
         triggerFireFar();
         exec.schedule(this::triggerHoldFar, SHOOT_TIME, TimeUnit.MILLISECONDS);
         exec.schedule(this::triggerFireFar, SHOOT_TIME + WAIT_TIME, TimeUnit.MILLISECONDS);
         exec.schedule(this::triggerHoldFar, SHOOT_TIME * 2 + WAIT_TIME, TimeUnit.MILLISECONDS);
         exec.schedule(this::triggerFireFar, SHOOT_TIME * 2 + WAIT_TIME * 2, TimeUnit.MILLISECONDS);
         exec.schedule(this::triggerHoldFar, SHOOT_TIME * 3 + WAIT_TIME * 2 + 50, TimeUnit.MILLISECONDS);
-        exec.schedule(this::closeGate, SHOOT_TIME * 3 + WAIT_TIME * 2 + 65, TimeUnit.MILLISECONDS);
-        if (stopIntake) {
-            exec.schedule(intake::intakeStop, SHOOT_TIME * 3 + WAIT_TIME * 2 + 67, TimeUnit.MILLISECONDS);
-        }
-        exec.schedule(() -> busy = false, SHOOT_TIME * 3 + WAIT_TIME * 2 + 69, TimeUnit.MILLISECONDS);
+        exec.schedule(this::closeGate, SHOOT_TIME * 3 + WAIT_TIME * 2 + 52, TimeUnit.MILLISECONDS);
+        exec.schedule(() -> busy = false, SHOOT_TIME * 3 + WAIT_TIME * 2 + 54, TimeUnit.MILLISECONDS);
     }
 
     public void triggerPut() {
