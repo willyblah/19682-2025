@@ -18,8 +18,8 @@ import org.firstinspires.ftc.teamcode.subsystems.Drawing;
 import org.firstinspires.ftc.teamcode.subsystems.Follower;
 import org.firstinspires.ftc.teamcode.subsystems.Robot;
 
-@Autonomous(name = "RED | Far | 9")
-public class AutoRedFar9 extends OpMode {
+@Autonomous(name = "BLUE | Far | 9")
+public class AutoBlueFar9 extends OpMode {
     private static Follower follower;
     @IgnoreConfigurable
     static TelemetryManager telemetryM;
@@ -30,7 +30,7 @@ public class AutoRedFar9 extends OpMode {
         telemetryM = PanelsTelemetry.INSTANCE.getTelemetry();
         // 初始化跟随系统
         follower = new Follower(hardwareMap, telemetryM);
-        follower.setStartingPose(RED_FAR_START);
+        follower.setStartingPose(BLUE_FAR_START);
         // 初始化机器人系统
         robot.autoInit(hardwareMap);
         Drawing.init();
@@ -70,7 +70,7 @@ public class AutoRedFar9 extends OpMode {
         CommandScheduler.getInstance().schedule(
                 new SequentialCommandGroup(
                         new InstantCommand(() -> robot.shooter.setShooterVelocity(SHOOT_VELOCITY_FAR)),
-                        new DrivePointToPoint(follower, RED_FAR_START, RED_FAR_SHOOT),
+                        new DrivePointToPoint(follower, BLUE_FAR_START, BLUE_FAR_SHOOT),
                         new InstantCommand(() -> robot.intake.intakeIn()),
                         new WaitCommand(300),
                         new InstantCommand(() -> robot.shooter.triggerPut()),
@@ -82,13 +82,13 @@ public class AutoRedFar9 extends OpMode {
                         // 第一次
                         new InstantCommand(() -> robot.shooter.setTriggerMotor()),
                         new InstantCommand(() -> robot.shooter.reverseTriggerServo()),
-                        new DrivePointToPoint(follower, RED_FAR_SHOOT, RED_FAR_INTAKE_3),
+                        new DrivePointToPoint(follower, BLUE_FAR_SHOOT, BLUE_FAR_INTAKE_3),
                         new WaitCommand(400),
-                        new DrivePointToPoint(follower, RED_FAR_INTAKE_3, RED_FAR_INTAKE_2),
-                        new DrivePointToPoint(follower, RED_FAR_INTAKE_2, RED_FAR_INTAKE_1),
+                        new DrivePointToPoint(follower, BLUE_FAR_INTAKE_3, BLUE_FAR_INTAKE_2),
+                        new DrivePointToPoint(follower, BLUE_FAR_INTAKE_2, BLUE_FAR_INTAKE_1),
                         new WaitCommand(400),
 
-                        new DrivePointToPoint(follower, RED_FAR_INTAKE_3, RED_FAR_SHOOT),
+                        new DrivePointToPoint(follower, BLUE_FAR_INTAKE_3, BLUE_FAR_SHOOT),
                         new InstantCommand(() -> robot.shooter.openGate()),
                         new WaitCommand(100),
                         new InstantCommand(() -> robot.shooter.slowFire(robot.intake, false)),
@@ -100,13 +100,13 @@ public class AutoRedFar9 extends OpMode {
                         // 第二次
                         new InstantCommand(() -> robot.shooter.setTriggerMotor()),
                         new InstantCommand(() -> robot.shooter.reverseTriggerServo()),
-                        new DrivePointToPoint(follower, RED_FAR_SHOOT, RED_FAR_INTAKE_3),
+                        new DrivePointToPoint(follower, BLUE_FAR_SHOOT, BLUE_FAR_INTAKE_3),
                         new WaitCommand(400),
-                        new DrivePointToPoint(follower, RED_FAR_INTAKE_3, RED_FAR_INTAKE_2),
-                        new DrivePointToPoint(follower, RED_FAR_INTAKE_2, RED_FAR_INTAKE_1),
+                        new DrivePointToPoint(follower, BLUE_FAR_INTAKE_3, BLUE_FAR_INTAKE_2),
+                        new DrivePointToPoint(follower, BLUE_FAR_INTAKE_2, BLUE_FAR_INTAKE_1),
                         new WaitCommand(400),
 
-                        new DrivePointToPoint(follower, RED_FAR_INTAKE_3, RED_FAR_SHOOT),
+                        new DrivePointToPoint(follower, BLUE_FAR_INTAKE_3, BLUE_FAR_SHOOT),
                         new InstantCommand(() -> robot.shooter.openGate()),
                         new WaitCommand(100),
                         new InstantCommand(() -> robot.shooter.slowFire(robot.intake, false)),
@@ -115,7 +115,7 @@ public class AutoRedFar9 extends OpMode {
                         new InstantCommand(() -> robot.shooter.triggerHold()),
 
                         new InstantCommand(() -> robot.intake.intakeStop()),
-                        new DrivePointToPoint(follower, RED_FAR_SHOOT, RED_FAR_PARK),
+                        new DrivePointToPoint(follower, BLUE_FAR_SHOOT, BLUE_FAR_PARK),
                         new InstantCommand(this::stop)
                 )
         );

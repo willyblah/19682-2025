@@ -10,12 +10,20 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 import com.qualcomm.robotcore.hardware.Servo;
 
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
 public class Shooter {
     public DcMotorEx leftShooter, rightShooter;
     private DcMotorEx triggerMotor;
     private CRServo triggerServo;
     private Servo shooterPanel;
     private Servo leftGate, rightGate;
+    private ScheduledExecutorService exec;
+    public boolean busy = false;
+    private static final int SHOOT_TIME = 340;
+    private static final int WAIT_TIME = 320;
 
     public void init(HardwareMap hardwareMap) {
         leftShooter = hardwareMap.get(DcMotorEx.class, LEFT_SHOOTER);
@@ -37,6 +45,8 @@ public class Shooter {
         rightShooter.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 //        leftShooter.setVelocityPIDFCoefficients(1, 1, 1, 1);
 //        rightShooter.setVelocityPIDFCoefficients(1, 1, 1, 1);
+
+        exec = Executors.newScheduledThreadPool(5);
     }
 
     public void setShooterVelocity(double velocity) {
@@ -71,6 +81,33 @@ public class Shooter {
         triggerServo.setPower(-1);
         triggerMotor.setPower(1);
         openGate();
+    }
+
+    private void triggerFireFar() {
+        triggerServo.setPower(-0.5);
+        triggerMotor.setPower(0.5);
+    }
+
+    private void triggerHoldFar() {
+        triggerServo.setPower(0);
+        triggerMotor.setPower(0);
+    }
+
+    public void slowFire(Intake intake, boolean stopIntake) {
+        busy = true;
+        openGate();
+        intake.intakeIn();
+        triggerFireFar();
+        exec.schedule(this::triggerHoldFar, SHOOT_TIME, TimeUnit.MILLISECONDS);
+        exec.schedule(this::triggerFireFar, SHOOT_TIME + WAIT_TIME, TimeUnit.MILLISECONDS);
+        exec.schedule(this::triggerHoldFar, SHOOT_TIME * 2 + WAIT_TIME, TimeUnit.MILLISECONDS);
+        exec.schedule(this::triggerFireFar, SHOOT_TIME * 2 + WAIT_TIME * 2, TimeUnit.MILLISECONDS);
+        exec.schedule(this::triggerHoldFar, SHOOT_TIME * 3 + WAIT_TIME * 2 + 50, TimeUnit.MILLISECONDS);
+        exec.schedule(this::closeGate, SHOOT_TIME * 3 + WAIT_TIME * 2 + 65, TimeUnit.MILLISECONDS);
+        if (stopIntake) {
+            exec.schedule(intake::intakeStop, SHOOT_TIME * 3 + WAIT_TIME * 2 + 67, TimeUnit.MILLISECONDS);
+        }
+        exec.schedule(() -> busy = false, SHOOT_TIME * 3 + WAIT_TIME * 2 + 69, TimeUnit.MILLISECONDS);
     }
 
     public void triggerPut() {

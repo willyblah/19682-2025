@@ -18,8 +18,8 @@ import org.firstinspires.ftc.teamcode.subsystems.Drawing;
 import org.firstinspires.ftc.teamcode.subsystems.Follower;
 import org.firstinspires.ftc.teamcode.subsystems.Robot;
 
-@Autonomous(name = "RED | Near | 12")
-public class AutoRedNear12 extends OpMode {
+@Autonomous(name = "BLUE | Near | 15")
+public class AutoBlueNear15 extends OpMode {
     private static Follower follower;
     @IgnoreConfigurable
     static TelemetryManager telemetryM;
@@ -30,7 +30,7 @@ public class AutoRedNear12 extends OpMode {
         telemetryM = PanelsTelemetry.INSTANCE.getTelemetry();
         // 初始化跟随系统
         follower = new Follower(hardwareMap, telemetryM);
-        follower.setStartingPose(RED_NER_START);
+        follower.setStartingPose(BLUE_NER_START);
         // 初始化机器人系统
         robot.autoInit(hardwareMap);
         Drawing.init();
@@ -71,75 +71,87 @@ public class AutoRedNear12 extends OpMode {
                 new SequentialCommandGroup(
                         // 发射预载球
                         new InstantCommand(() -> robot.shooter.setShooterVelocity(SHOOT_VELOCITY_NER_1)),
-                        new DrivePointToPoint(follower, RED_NER_START, RED_NER_SHOOT_1),
+                        new DrivePointToPoint(follower, BLUE_NER_START, BLUE_NER_SHOOT_1),
                         new InstantCommand(() -> robot.intake.intakeIn()),
                         new WaitCommand(300),
                         new InstantCommand(() -> robot.shooter.triggerPut()),
                         new WaitCommand(200),
                         new InstantCommand(() -> robot.shooter.triggerFire()),
-                        new WaitCommand(1000),
+                        new WaitCommand(900),
                         new InstantCommand(() -> robot.shooter.triggerHold()),
 
                         // 收集第一组球
                         new InstantCommand(() -> robot.shooter.setTriggerMotor()),
                         new InstantCommand(() -> robot.shooter.reverseTriggerServo()),
-                        new DrivePointToPoint(follower, RED_NER_SHOOT_1, RED_NER_INTAKE_PRE_1),
-                        new DrivePointToPoint(follower, RED_NER_INTAKE_PRE_1, RED_NER_INTAKE_1, 0.6),
+                        new DrivePointToPoint(follower, BLUE_NER_SHOOT_1, BLUE_NER_INTAKE_PRE_1),
+                        new DrivePointToPoint(follower, BLUE_NER_INTAKE_PRE_1, BLUE_NER_INTAKE_1, 0.8),
                         new InstantCommand(() -> robot.shooter.triggerHold()),
                         new InstantCommand(() -> robot.shooter.setTriggerServo()),
-                        new WaitCommand(200),
 
                         // 发射第一组球
-                        new DrivePointToPoint(follower, RED_NER_INTAKE_1, RED_NER_SHOOT_1),
+                        new DrivePointToPoint(follower, BLUE_NER_INTAKE_1, BLUE_NER_SHOOT_1),
                         new InstantCommand(() -> robot.shooter.openGate()),
                         new WaitCommand(100),
                         new InstantCommand(() -> robot.shooter.triggerFire()),
-                        new WaitCommand(1000),
+                        new WaitCommand(900),
                         new InstantCommand(() -> robot.shooter.triggerHold()),
 
                         // 收集第二组球
                         new InstantCommand(() -> robot.shooter.setTriggerMotor()),
                         new InstantCommand(() -> robot.shooter.reverseTriggerServo()),
-                        new DrivePointToPoint(follower, RED_NER_SHOOT_1, RED_NER_INTAKE_PRE_2),
-                        new DrivePointToPoint(follower, RED_NER_INTAKE_PRE_2, RED_NER_INTAKE_2, 0.6),
+                        new DrivePointToPoint(follower, BLUE_NER_SHOOT_1, BLUE_NER_INTAKE_PRE_2),
+                        new DrivePointToPoint(follower, BLUE_NER_INTAKE_PRE_2, BLUE_NER_INTAKE_2, 0.8),
                         new InstantCommand(() -> robot.shooter.triggerHold()),
                         new InstantCommand(() -> robot.shooter.setTriggerServo()),
-                        new WaitCommand(200),
-
-                        // 开闸
-                        new InstantCommand(() -> robot.intake.intakeStop()),
-                        new DrivePointToPoint(follower, RED_NER_INTAKE_2, RED_NER_GATE_MID, RED_NER_GATE),
-                        new WaitCommand(500),
-                        new InstantCommand(() -> robot.intake.intakeIn()),
 
                         // 发射第二组球
-                        new DrivePointToPoint(follower, RED_NER_GATE, RED_NER_SHOOT_2),
+                        new DrivePointToPoint(follower, BLUE_NER_INTAKE_2, BLUE_NER_GATE_MID, BLUE_NER_SHOOT_2),
                         new InstantCommand(() -> robot.shooter.openGate()),
                         new WaitCommand(100),
                         new InstantCommand(() -> robot.shooter.triggerFire()),
-                        new WaitCommand(1000),
+                        new WaitCommand(900),
+                        new InstantCommand(() -> robot.shooter.triggerHold()),
+
+                        // 吸闸里的球
+                        new InstantCommand(() -> robot.intake.intakeStop()),
+                        new DrivePointToPoint(follower, BLUE_NER_SHOOT_2, BLUE_NER_GATE),
+                        new WaitCommand(180),
+                        new InstantCommand(() -> robot.intake.intakeIn()),
+                        new InstantCommand(() -> robot.shooter.setTriggerMotor()),
+                        new InstantCommand(() -> robot.shooter.reverseTriggerServo()),
+                        new DrivePointToPoint(follower, BLUE_NER_GATE, BLUE_NER_SUCK_MID, BLUE_NER_SUCK_1),
+                        new WaitCommand(300),
+                        new DrivePointToPoint(follower, BLUE_NER_SUCK_1, BLUE_NER_SUCK_2),
+                        new DrivePointToPoint(follower, BLUE_NER_SUCK_2, BLUE_NER_SUCK_3),
+                        new WaitCommand(300),
+
+                        // 发闸里的球
+                        new DrivePointToPoint(follower, BLUE_NER_SUCK_3, BLUE_NER_SHOOT_2),
+                        new InstantCommand(() -> robot.shooter.openGate()),
+                        new WaitCommand(100),
+                        new InstantCommand(() -> robot.shooter.triggerFire()),
+                        new WaitCommand(900),
                         new InstantCommand(() -> robot.shooter.triggerHold()),
 
                         // 收集第三组球
                         new InstantCommand(() -> robot.shooter.setTriggerMotor()),
                         new InstantCommand(() -> robot.shooter.reverseTriggerServo()),
-                        new DrivePointToPoint(follower, RED_NER_SHOOT_2, RED_NER_INTAKE_PRE_3),
-                        new DrivePointToPoint(follower, RED_NER_INTAKE_PRE_3, RED_NER_INTAKE_3, 0.6),
+                        new DrivePointToPoint(follower, BLUE_NER_SHOOT_2, BLUE_NER_INTAKE_PRE_3),
+                        new DrivePointToPoint(follower, BLUE_NER_INTAKE_PRE_3, BLUE_NER_INTAKE_3, 0.8),
                         new InstantCommand(() -> robot.shooter.triggerHold()),
                         new InstantCommand(() -> robot.shooter.setTriggerServo()),
-                        new WaitCommand(200),
 
                         // 发射第三组球
-                        new DrivePointToPoint(follower, RED_NER_INTAKE_3, RED_NER_SHOOT_2),
+                        new DrivePointToPoint(follower, BLUE_NER_INTAKE_3, BLUE_NER_SHOOT_2),
                         new InstantCommand(() -> robot.shooter.openGate()),
                         new WaitCommand(100),
                         new InstantCommand(() -> robot.shooter.triggerFire()),
-                        new WaitCommand(1000),
+                        new WaitCommand(900),
                         new InstantCommand(() -> robot.shooter.triggerHold()),
-                        new InstantCommand(() -> robot.shooter.shooterStop()),
 
                         new InstantCommand(() -> robot.intake.intakeStop()),
-                        new DrivePointToPoint(follower, RED_NER_SHOOT_2, RED_NER_PARK),
+                        new InstantCommand(() -> robot.shooter.shooterStop()),
+                        new DrivePointToPoint(follower, BLUE_NER_SHOOT_2, BLUE_NER_PARK),
                         new InstantCommand(this::stop)
                 )
         );

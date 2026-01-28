@@ -115,7 +115,7 @@ public class AutoRedNear15 extends OpMode {
                         // 吸闸里的球
                         new InstantCommand(() -> robot.intake.intakeStop()),
                         new DrivePointToPoint(follower, RED_NER_SHOOT_2, RED_NER_GATE),
-                        new WaitCommand(200),
+                        new WaitCommand(180),
                         new InstantCommand(() -> robot.intake.intakeIn()),
                         new InstantCommand(() -> robot.shooter.setTriggerMotor()),
                         new InstantCommand(() -> robot.shooter.reverseTriggerServo()),
@@ -126,7 +126,7 @@ public class AutoRedNear15 extends OpMode {
                         new WaitCommand(300),
 
                         // 发闸里的球
-                        new DrivePointToPoint(follower, RED_NER_SUCK_3, RED_NER_GATE_MID, RED_NER_SHOOT_2),
+                        new DrivePointToPoint(follower, RED_NER_SUCK_3, RED_NER_SHOOT_2),
                         new InstantCommand(() -> robot.shooter.openGate()),
                         new WaitCommand(100),
                         new InstantCommand(() -> robot.shooter.triggerFire()),
