@@ -78,7 +78,7 @@ public class A_Tele extends LinearOpMode {
                 robot.intake.intakeIn();
             }
 
-            if (!gamepad1.a && !gamepad1.right_bumper && !(gamepad1.right_trigger > 0.2)) {
+            if (!gamepad1.a && !gamepad1.right_bumper && gamepad1.right_trigger <= 0.1) {
                 robot.intake.intakeStop();
                 robot.shooter.triggerHold();
             }

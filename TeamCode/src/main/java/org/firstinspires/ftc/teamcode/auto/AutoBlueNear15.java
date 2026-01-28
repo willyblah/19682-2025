@@ -115,7 +115,7 @@ public class AutoBlueNear15 extends OpMode {
                         // 吸闸里的球
                         new InstantCommand(() -> robot.intake.intakeStop()),
                         new DrivePointToPoint(follower, BLUE_NER_SHOOT_2, BLUE_NER_GATE),
-                        new WaitCommand(180),
+                        new WaitCommand(200),
                         new InstantCommand(() -> robot.intake.intakeIn()),
                         new InstantCommand(() -> robot.shooter.setTriggerMotor()),
                         new InstantCommand(() -> robot.shooter.reverseTriggerServo()),

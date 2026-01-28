@@ -75,8 +75,8 @@ public class AutoBlueFar9 extends OpMode {
                         new WaitCommand(300),
                         new InstantCommand(() -> robot.shooter.triggerPut()),
                         new WaitCommand(200),
-                        new InstantCommand(() -> robot.shooter.slowFire(false)),
-                        new WaitCommand(2800),
+                        new InstantCommand(() -> robot.shooter.slowFire()),
+                        new WaitCommand(3000),
                         new InstantCommand(() -> robot.shooter.triggerHold()),
 
                         // 第一次
@@ -91,8 +91,8 @@ public class AutoBlueFar9 extends OpMode {
                         new DrivePointToPoint(follower, BLUE_FAR_INTAKE_3, BLUE_FAR_SHOOT),
                         new InstantCommand(() -> robot.shooter.openGate()),
                         new WaitCommand(100),
-                        new InstantCommand(() -> robot.shooter.slowFire(false)),
-                        new WaitCommand(2800),
+                        new InstantCommand(() -> robot.shooter.slowFire()),
+                        new WaitCommand(3000),
                         new InstantCommand(() -> robot.shooter.triggerHold()),
 
                         new WaitCommand(3000),
@@ -109,8 +109,8 @@ public class AutoBlueFar9 extends OpMode {
                         new DrivePointToPoint(follower, BLUE_FAR_INTAKE_3, BLUE_FAR_SHOOT),
                         new InstantCommand(() -> robot.shooter.openGate()),
                         new WaitCommand(100),
-                        new InstantCommand(() -> robot.shooter.slowFire(false)),
-                        new WaitCommand(2800),
+                        new InstantCommand(() -> robot.shooter.slowFire()),
+                        new WaitCommand(3000),
                         new InstantCommand(() -> robot.shooter.shooterStop()),
                         new InstantCommand(() -> robot.shooter.triggerHold()),
 

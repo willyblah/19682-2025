@@ -66,11 +66,7 @@ public class AB_Tele extends LinearOpMode {
                 robot.intake.intakeIn();
             }
 
-            if (gamepad2.dpadRightWasPressed()) {
-                robot.shooter.slowFire(true);
-            }
-
-            if (!gamepad2.a && !gamepad2.right_bumper && gamepad1.right_trigger <= 0.1 && !robot.shooter.busy) {
+            if (!gamepad2.a && !gamepad2.right_bumper && gamepad1.right_trigger <= 0.1) {
                 robot.intake.intakeStop();
                 robot.shooter.triggerHold();
             }
@@ -79,7 +75,6 @@ public class AB_Tele extends LinearOpMode {
             telemetry.addData("left velocity", robot.shooter.getLeftVelocity());
             telemetry.addData("right velocity", robot.shooter.getRightVelocity());
             telemetry.addData("panel", panel);
-            telemetry.addData("slow shooting", robot.shooter.busy);
             telemetry.update();
         }
     }
