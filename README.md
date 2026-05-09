@@ -1,0 +1,1 @@
+**This repository contains the code of FTC team 19682 for the 2025-2026 season.**
