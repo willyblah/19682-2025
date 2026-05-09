@@ -18,11 +18,11 @@ public class AutoConstants {
 
     // 第二组球收集位置
     public static Pose RED_NER_INTAKE_PRE_2 = new Pose(96, 59, Math.toRadians(90));
-    public static Pose RED_NER_INTAKE_2 = new Pose(136, 59, Math.toRadians(90));
+    public static Pose RED_NER_INTAKE_2 = new Pose(139, 59, Math.toRadians(90));
 
     // 第三组球收集位置
     public static Pose RED_NER_INTAKE_PRE_3 = new Pose(96, 35, Math.toRadians(90));
-    public static Pose RED_NER_INTAKE_3 = new Pose(136, 35, Math.toRadians(90));
+    public static Pose RED_NER_INTAKE_3 = new Pose(139, 35, Math.toRadians(90));
 
     // 发射位置
     public static Pose RED_NER_SHOOT_1 = new Pose(99, 89, Math.toRadians(145));
@@ -62,9 +62,9 @@ public class AutoConstants {
     public static Pose BLUE_NER_INTAKE_PRE_1 = new Pose(144 - 95, 83, Math.toRadians(270));
     public static Pose BLUE_NER_INTAKE_1 = new Pose(144 - 130, 83, Math.toRadians(270));
     public static Pose BLUE_NER_INTAKE_PRE_2 = new Pose(144 - 96, 59, Math.toRadians(270));
-    public static Pose BLUE_NER_INTAKE_2 = new Pose(144 - 136, 59, Math.toRadians(270));
+    public static Pose BLUE_NER_INTAKE_2 = new Pose(144 - 139, 59, Math.toRadians(270));
     public static Pose BLUE_NER_INTAKE_PRE_3 = new Pose(144 - 96, 35, Math.toRadians(270));
-    public static Pose BLUE_NER_INTAKE_3 = new Pose(144 - 136, 35, Math.toRadians(270));
+    public static Pose BLUE_NER_INTAKE_3 = new Pose(144 - 139, 35, Math.toRadians(270));
     public static Pose BLUE_NER_SHOOT_1 = new Pose(144 - 99, 89, Math.toRadians(215));
     public static Pose BLUE_NER_SHOOT_2 = new Pose(144 - 94, 89, Math.toRadians(225));
     public static Pose BLUE_NER_GATE_MID_1 = new Pose(144 - 118, 63);
