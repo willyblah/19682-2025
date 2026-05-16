@@ -101,17 +101,12 @@ public class AutoRedFar9 extends OpMode {
                         new InstantCommand(() -> robot.shooter.triggerHold()),
 
                         new InstantCommand(() -> robot.shooter.triggerSlow()),
-//                        new ParallelRaceGroup(
-//                                new SequentialCommandGroup(
                         new DrivePointToPoint(follower, RED_FAR_SHOOT, RED_FAR_INTAKE_1),
                         new WaitCommand(400),
                         new DrivePointToPoint(follower, RED_FAR_INTAKE_1, RED_FAR_INTAKE_4),
                         new DrivePointToPoint(follower, RED_FAR_INTAKE_4, RED_FAR_INTAKE_2),
                         new DrivePointToPoint(follower, RED_FAR_INTAKE_2, RED_FAR_INTAKE_3),
                         new WaitCommand(400),
-//                                ),
-//                                new WaitCommand(4500)
-//                        ),
                         new InstantCommand(() -> robot.shooter.triggerHold()),
 
                         new DrivePointToPoint(follower, RED_FAR_INTAKE_3, RED_FAR_SHOOT),

@@ -128,18 +128,9 @@ public class AutoBlueFar9 extends OpMode {
                         new WaitCommand(180),
                         new InstantCommand(() -> robot.shooter.triggerHold()),
 
-//                        new InstantCommand(() -> robot.shooter.triggerSlow()),
-//                        new DrivePointToPoint(follower, BLUE_FAR_SHOOT, BLUE_FAR_SUCK),
-//                        new WaitCommand(4000),
-//                        new InstantCommand(() -> robot.shooter.triggerHold()),
-
                         new InstantCommand(() -> robot.shooter.triggerSlow()),
-                        new DrivePointToPoint(follower, BLUE_FAR_SHOOT, BLUE_FAR_INTAKE_1),
-                        new WaitCommand(400),
-                        new DrivePointToPoint(follower, BLUE_FAR_INTAKE_1, BLUE_FAR_INTAKE_4),
-                        new DrivePointToPoint(follower, BLUE_FAR_INTAKE_4, BLUE_FAR_INTAKE_2),
-                        new DrivePointToPoint(follower, BLUE_FAR_INTAKE_2, BLUE_FAR_INTAKE_3),
-                        new WaitCommand(400),
+                        new DrivePointToPoint(follower, BLUE_FAR_SHOOT, BLUE_FAR_SUCK),
+                        new WaitCommand(4000),
                         new InstantCommand(() -> robot.shooter.triggerHold()),
 
                         new DrivePointToPoint(follower, BLUE_FAR_INTAKE_3, BLUE_FAR_SHOOT),
