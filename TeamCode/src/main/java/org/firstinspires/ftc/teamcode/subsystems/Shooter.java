@@ -75,8 +75,8 @@ public class Shooter {
     }
 
     public void triggerFireFar() {
-        triggerServo.setPower(-0.7);
-        triggerMotor.setPower(0.7);
+        triggerServo.setPower(-0.5);
+        triggerMotor.setPower(0.5);
         openGate();
     }
 

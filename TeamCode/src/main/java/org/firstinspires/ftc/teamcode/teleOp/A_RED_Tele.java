@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.teleOp;
 
+import static org.firstinspires.ftc.teamcode.constants.AutoConstants.BLUE_MANUAL_POS;
+import static org.firstinspires.ftc.teamcode.constants.AutoConstants.RED_MANUAL_POS;
 import static org.firstinspires.ftc.teamcode.constants.RobotConstants.MANUAL_POS;
 import static org.firstinspires.ftc.teamcode.constants.RobotConstants.PANEL_FAR;
 import static org.firstinspires.ftc.teamcode.constants.RobotConstants.PANEL_NER_1;
@@ -39,10 +41,10 @@ public class A_RED_Tele extends LinearOpMode {
     @Override
     public void runOpMode() {
         robot.init(hardwareMap);
-        robot.drivetrain.pinPoint.setPosition(new Pose2D(DistanceUnit.INCH, 8, 8, AngleUnit.RADIANS, autoEndH));
+        robot.drivetrain.pinPoint.setPosition(new Pose2D(DistanceUnit.INCH, 8, 8, AngleUnit.RADIANS, RED_MANUAL_POS.getHeading()));
 
         waitForStart();
-        robot.drivetrain.pinPoint.setPosition(new Pose2D(DistanceUnit.INCH, 8, 8, AngleUnit.RADIANS, autoEndH));
+        robot.drivetrain.pinPoint.setPosition(new Pose2D(DistanceUnit.INCH, 8, 8, AngleUnit.RADIANS, RED_MANUAL_POS.getHeading()));
 
         teleOpTargetX = teleOpTargetXR;
         teleOpTargetY = teleOpTargetYR;
@@ -84,7 +86,7 @@ public class A_RED_Tele extends LinearOpMode {
             }
 
             if (gamepad1.dpad_up) {
-                robot.drivetrain.pinPoint.setPosition(new Pose2D(DistanceUnit.INCH, MANUAL_POS.getX(), MANUAL_POS.getY(), AngleUnit.RADIANS, MANUAL_POS.getHeading()));
+                robot.drivetrain.pinPoint.setPosition(new Pose2D(DistanceUnit.INCH, RED_MANUAL_POS.getX(), RED_MANUAL_POS.getY(), AngleUnit.RADIANS, RED_MANUAL_POS.getHeading()));
             }
 
             if (gamepad2.dpadUpWasPressed()) {
