@@ -39,10 +39,10 @@ public class A_RED_Tele extends LinearOpMode {
     @Override
     public void runOpMode() {
         robot.init(hardwareMap);
-        robot.drivetrain.pinPoint.setPosition(new Pose2D(DistanceUnit.INCH, autoEndX, autoEndY, AngleUnit.RADIANS, autoEndH));
+        robot.drivetrain.pinPoint.setPosition(new Pose2D(DistanceUnit.INCH, 8, 8, AngleUnit.RADIANS, autoEndH));
 
         waitForStart();
-        robot.drivetrain.pinPoint.setPosition(new Pose2D(DistanceUnit.INCH, autoEndX, autoEndY, AngleUnit.RADIANS, autoEndH));
+        robot.drivetrain.pinPoint.setPosition(new Pose2D(DistanceUnit.INCH, 8, 8, AngleUnit.RADIANS, autoEndH));
 
         teleOpTargetX = teleOpTargetXR;
         teleOpTargetY = teleOpTargetYR;
