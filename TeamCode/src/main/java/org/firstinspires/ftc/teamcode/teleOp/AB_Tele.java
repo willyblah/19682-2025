@@ -92,7 +92,8 @@ public class AB_Tele extends LinearOpMode {
 
             if (gamepad2.right_bumper) {
                 robot.intake.intakeIn();
-                robot.shooter.triggerFire();
+                if (velocity == SHOOT_VELOCITY_FAR) robot.shooter.triggerFireFar();
+                else robot.shooter.triggerFire();
             } else if (gamepad2.a) {
                 robot.shooter.reverseTriggerServo();
                 robot.intake.intakeIn();

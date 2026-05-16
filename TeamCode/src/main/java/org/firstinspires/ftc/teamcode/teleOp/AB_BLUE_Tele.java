@@ -98,7 +98,7 @@ public class AB_BLUE_Tele extends LinearOpMode {
 
             if (gamepad2.right_bumper) {
                 robot.intake.intakeIn();
-                robot.shooter.triggerFire();
+
             } else if (gamepad2.a) {
                 robot.shooter.reverseTriggerServo();
                 robot.intake.intakeIn();

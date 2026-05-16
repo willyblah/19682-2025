@@ -20,9 +20,9 @@ public class RobotConstants {
     public static volatile boolean teleOpRev = Boolean.TRUE;
     public static volatile Pose MANUAL_POS;
 
-    public static int SHOOT_VELOCITY_NER_1 = 1940;
-    public static int SHOOT_VELOCITY_NER_2 = 2200;
-    public static int SHOOT_VELOCITY_FAR = 2500;
+    public static int SHOOT_VELOCITY_NER_1 = 1900;
+    public static int SHOOT_VELOCITY_NER_2 = 2180;
+    public static int SHOOT_VELOCITY_FAR = 2520;
 
     public static double PANEL_NER_1 = 0.68;
     public static double PANEL_NER_2 = 0.84;
