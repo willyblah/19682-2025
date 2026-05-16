@@ -186,10 +186,10 @@ public class Drivetrain {
     }
 
     public AimResult driveCenterWithAutoAim(Gamepad gamepad1, double p, boolean autoAimActive, boolean reverse) {
-        double y = -gamepad1.left_stick_y, x = gamepad1.left_stick_x, rx = gamepad1.right_stick_x * 0.85;
-        if (reverse){
-            y=-y;
-            x=-x;
+        double y = -gamepad1.left_stick_y, x = gamepad1.left_stick_x, rx = gamepad1.right_stick_x * 0.75;
+        if (reverse) {
+            y = -y;
+            x = -x;
         }
         pinPoint.update();
         theta = Math.atan2(y, x) * 180 / Math.PI;
