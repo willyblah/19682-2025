@@ -1,24 +1,7 @@
 package org.firstinspires.ftc.teamcode.teleOp;
 
-import static org.firstinspires.ftc.teamcode.constants.AutoConstants.BLUE_MANUAL_POS;
-import static org.firstinspires.ftc.teamcode.constants.AutoConstants.RED_MANUAL_POS;
-import static org.firstinspires.ftc.teamcode.constants.RobotConstants.MANUAL_POS;
-import static org.firstinspires.ftc.teamcode.constants.RobotConstants.PANEL_FAR;
-import static org.firstinspires.ftc.teamcode.constants.RobotConstants.PANEL_NER_1;
-import static org.firstinspires.ftc.teamcode.constants.RobotConstants.PANEL_NER_2;
-import static org.firstinspires.ftc.teamcode.constants.RobotConstants.SHOOT_VELOCITY_FAR;
-import static org.firstinspires.ftc.teamcode.constants.RobotConstants.SHOOT_VELOCITY_NER_1;
-import static org.firstinspires.ftc.teamcode.constants.RobotConstants.SHOOT_VELOCITY_NER_2;
-import static org.firstinspires.ftc.teamcode.constants.RobotConstants.autoEndH;
-import static org.firstinspires.ftc.teamcode.constants.RobotConstants.autoEndX;
-import static org.firstinspires.ftc.teamcode.constants.RobotConstants.autoEndY;
-import static org.firstinspires.ftc.teamcode.constants.RobotConstants.teleOpRev;
-import static org.firstinspires.ftc.teamcode.constants.RobotConstants.teleOpTargetX;
-import static org.firstinspires.ftc.teamcode.constants.RobotConstants.teleOpTargetXB;
-import static org.firstinspires.ftc.teamcode.constants.RobotConstants.teleOpTargetXR;
-import static org.firstinspires.ftc.teamcode.constants.RobotConstants.teleOpTargetY;
-import static org.firstinspires.ftc.teamcode.constants.RobotConstants.teleOpTargetYB;
-import static org.firstinspires.ftc.teamcode.constants.RobotConstants.teleOpTargetYR;
+import static org.firstinspires.ftc.teamcode.constants.AutoConstants.*;
+import static org.firstinspires.ftc.teamcode.constants.RobotConstants.*;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -41,10 +24,10 @@ public class A_RED_Tele extends LinearOpMode {
     @Override
     public void runOpMode() {
         robot.init(hardwareMap);
-        robot.drivetrain.pinPoint.setPosition(new Pose2D(DistanceUnit.INCH, 8, 8, AngleUnit.RADIANS, RED_MANUAL_POS.getHeading()));
+        robot.drivetrain.pinPoint.setPosition(new Pose2D(DistanceUnit.INCH, 8, 8, AngleUnit.RADIANS, Math.PI / 2.0));
 
         waitForStart();
-        robot.drivetrain.pinPoint.setPosition(new Pose2D(DistanceUnit.INCH, 8, 8, AngleUnit.RADIANS, RED_MANUAL_POS.getHeading()));
+        robot.drivetrain.pinPoint.setPosition(new Pose2D(DistanceUnit.INCH, 8, 8, AngleUnit.RADIANS, Math.PI / 2.0));
 
         teleOpTargetX = teleOpTargetXR;
         teleOpTargetY = teleOpTargetYR;
@@ -56,7 +39,7 @@ public class A_RED_Tele extends LinearOpMode {
             }
 
             boolean autoAimActive = gamepad1.left_bumper;
-            AimResult aimResult = robot.drivetrain.driveCenterWithAutoAim(gamepad1, 1, autoAimActive, teleOpRev);
+            AimResult aimResult = robot.drivetrain.driveCenterWithAutoAim(gamepad1, 1, autoAimActive, false);
 
             if (aimResult.aimCompleted && !lastAimCompleted && !hasRumbledForAim) {
                 gamepad2.rumble(200);
@@ -99,7 +82,7 @@ public class A_RED_Tele extends LinearOpMode {
                 panel += 0.04;
             }
 
-            if (gamepad1.a) {
+            if (gamepad1.aWasPressed()) {
                 shooterOn = !shooterOn;
             }
             if (shooterOn) {

@@ -1,8 +1,7 @@
 package org.firstinspires.ftc.teamcode.teleOp;
 
-import static org.firstinspires.ftc.teamcode.constants.AutoConstants.RED_MANUAL_POS;
+import static org.firstinspires.ftc.teamcode.constants.AutoConstants.*;
 import static org.firstinspires.ftc.teamcode.constants.RobotConstants.*;
-import static org.firstinspires.ftc.teamcode.constants.RobotConstants.MANUAL_POS;
 
 import static java.lang.Math.abs;
 
