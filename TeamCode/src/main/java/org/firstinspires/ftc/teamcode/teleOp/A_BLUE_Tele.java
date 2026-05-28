@@ -53,7 +53,7 @@ public class A_BLUE_Tele extends LinearOpMode {
             }
 
             boolean autoAimActive = gamepad1.left_bumper;
-            AimResult aimResult = robot.drivetrain.driveCenterWithAutoAim(gamepad1, 1, autoAimActive, teleOpRev);
+            AimResult aimResult = robot.drivetrain.driveCenterWithAutoAim(gamepad1, 1, autoAimActive, true);
 
             if (aimResult.aimCompleted && !lastAimCompleted && !hasRumbledForAim) {
                 gamepad2.rumble(200);

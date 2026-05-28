@@ -22,7 +22,7 @@ public class RobotConstants {
 
     // Max speed: 2880
     public static int SHOOT_VELOCITY_NER_1 = 1900;
-    public static int SHOOT_VELOCITY_NER_2 = 2180;
+    public static int SHOOT_VELOCITY_NER_2 = 2220;
     public static int SHOOT_VELOCITY_FAR = 2700;
 
     public static double PANEL_NER_1 = 0.68;

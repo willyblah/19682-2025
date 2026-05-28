@@ -5,7 +5,6 @@ import static org.firstinspires.ftc.teamcode.constants.RobotConstants.*;
 
 import com.arcrobotics.ftclib.command.CommandScheduler;
 import com.arcrobotics.ftclib.command.InstantCommand;
-import com.arcrobotics.ftclib.command.ParallelRaceGroup;
 import com.arcrobotics.ftclib.command.SequentialCommandGroup;
 import com.arcrobotics.ftclib.command.WaitCommand;
 import com.bylazar.configurables.annotations.IgnoreConfigurable;
@@ -88,6 +87,7 @@ public class AutoBlueFar9 extends OpMode {
                         new WaitCommand(1500),
 
                         new InstantCommand(() -> robot.shooter.triggerSlow()),
+                        new InstantCommand(() -> robot.shooter.closeGate()),
                         new DrivePointToPoint(follower, BLUE_FAR_SHOOT, BLUE_FAR_INTAKE_1),
                         new WaitCommand(400),
                         new DrivePointToPoint(follower, BLUE_FAR_INTAKE_1, BLUE_FAR_INTAKE_4),
@@ -103,6 +103,7 @@ public class AutoBlueFar9 extends OpMode {
                         new WaitCommand(1500),
 
                         new InstantCommand(() -> robot.shooter.triggerSlow()),
+                        new InstantCommand(() -> robot.shooter.closeGate()),
                         new DrivePointToPoint(follower, BLUE_FAR_SHOOT, BLUE_FAR_SUCK),
                         new WaitCommand(4000),
                         new InstantCommand(() -> robot.shooter.triggerHold()),
