@@ -49,7 +49,7 @@ public class A_Tele extends LinearOpMode {
             lastAimCompleted = aimResult.aimCompleted;
 
             if (gamepad1.right_trigger > 0.1) {
-                robot.shooter.triggerSlow();
+//                robot.shooter.triggerSlow();
                 robot.intake.intakeIn(gamepad1.right_trigger);
             } else if (gamepad1.left_trigger > 0.1) {
                 robot.intake.intakeOut();
@@ -106,11 +106,10 @@ public class A_Tele extends LinearOpMode {
                 else robot.shooter.triggerFire();
             }
 
-            if (!gamepad1.right_bumper && !(gamepad1.right_trigger > 0.1)) {
-                if (!(gamepad1.left_trigger > 0.1)) {
-                    robot.intake.intakeStop();
-                    robot.shooter.triggerHold();
-                }
+            if (!gamepad1.right_bumper && !(gamepad1.right_trigger > 0.1)
+                    && !(gamepad1.left_trigger > 0.1)) {
+                robot.intake.intakeStop();
+                robot.shooter.triggerHold();
             }
 
             telemetry.addData("target velocity", velocity);

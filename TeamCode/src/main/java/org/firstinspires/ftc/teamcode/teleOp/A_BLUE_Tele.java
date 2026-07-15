@@ -67,7 +67,7 @@ public class A_BLUE_Tele extends LinearOpMode {
 
             if (gamepad1.right_trigger > 0.1) {
                 robot.shooter.closeGate();
-                robot.shooter.triggerSlow();
+//                robot.shooter.triggerSlow();
                 intaking = true;
                 robot.intake.intakeIn(gamepad1.right_trigger);
             } else if (gamepad1.left_trigger > 0.1) {
@@ -131,11 +131,10 @@ public class A_BLUE_Tele extends LinearOpMode {
                 else robot.shooter.triggerFire();
             }
 
-            if (!gamepad1.right_bumper && !(gamepad1.right_trigger > 0.1)) {
-                if (!(gamepad1.left_trigger > 0.1)) {
-                    robot.intake.intakeStop();
-                    robot.shooter.triggerHold();
-                }
+            if (!gamepad1.right_bumper && !(gamepad1.right_trigger > 0.1)
+                    && !(gamepad1.left_trigger > 0.1)) {
+                robot.intake.intakeStop();
+                robot.shooter.triggerHold();
             }
 
             telemetry.addData("target velocity", velocity);

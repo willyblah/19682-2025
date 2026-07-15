@@ -57,13 +57,13 @@ public class AB_RED_Tele extends LinearOpMode {
             if (gamepad1.right_trigger > 0.1) {
                 robot.shooter.closeGate();
                 intaking = true;
-                robot.shooter.triggerSlow();
+//                robot.shooter.triggerSlow();
                 robot.intake.intakeIn(gamepad1.right_trigger);
             } else if (gamepad1.left_trigger > 0.1) {
                 robot.intake.intakeOut();
                 robot.shooter.triggerPut();
             }
-            else if (gamepad1.right_trigger <= 0.1){
+            else if (gamepad1.right_trigger <= 0.1) {
                 robot.intake.intakeStop();
                 intaking = false;
             }
@@ -127,17 +127,11 @@ public class AB_RED_Tele extends LinearOpMode {
                 else robot.shooter.triggerFire();
             }
 
-//            else if (gamepad2.a) {
-//                robot.shooter.reverseTriggerServo();
-//                robot.intake.intakeIn(1);
-//            }
-//
-//            if (!gamepad2.a && !gamepad2.right_bumper && !(gamepad1.right_trigger > 0.1)) {
-//                if (!(gamepad1.left_trigger > 0.1)) {
-//                    robot.intake.intakeStop();
-//                    robot.shooter.triggerHold();
-//                }
-//            }
+            if (!gamepad2.right_bumper && !(gamepad1.right_trigger > 0.1)
+                    && !(gamepad1.left_trigger > 0.1)) {
+                robot.intake.intakeStop();
+                robot.shooter.triggerHold();
+            }
 
             double leftVelocity = robot.shooter.getLeftVelocity();
             double rightVelocity = robot.shooter.getRightVelocity();
