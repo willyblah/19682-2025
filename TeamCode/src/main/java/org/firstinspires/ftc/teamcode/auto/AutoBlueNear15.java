@@ -19,7 +19,7 @@ import org.firstinspires.ftc.teamcode.subsystems.Follower;
 import org.firstinspires.ftc.teamcode.subsystems.Robot;
 
 @Autonomous(name = "BLUE | Near | 15")
-public class AutoBlueNear15 extends OpMode {
+public class  AutoBlueNear15 extends OpMode {
     private static Follower follower;
     @IgnoreConfigurable
     static TelemetryManager telemetryM;

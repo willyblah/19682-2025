@@ -38,11 +38,11 @@ public class Shooter {
 //        rightShooter.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
 
-    public void setShooterVelocity(double velocity) {
+    public void setShooterVelocity(double vel) {
         leftShooter.setVelocityPIDFCoefficients(P, I, D, F);
         rightShooter.setVelocityPIDFCoefficients(P, I, D, F);
-        leftShooter.setVelocity(velocity);
-        rightShooter.setVelocity(velocity);
+        leftShooter.setVelocity(vel);
+        rightShooter.setVelocity(vel);
     }
 
     public double getLeftVelocity() {
@@ -75,8 +75,8 @@ public class Shooter {
     }
 
     public void triggerFireFar() {
-        triggerServo.setPower(-0.6);
-        triggerMotor.setPower(0.6);
+        triggerServo.setPower(-1);
+        triggerMotor.setPower(1);
         openGate();
     }
 
@@ -88,7 +88,6 @@ public class Shooter {
     public void triggerHold() {
         triggerServo.setPower(0);
         triggerMotor.setPower(0);
-        closeGate();
     }
 
     public void reverseTriggerServo() {

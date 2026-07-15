@@ -18,16 +18,18 @@ import org.firstinspires.ftc.teamcode.subsystems.Drivetrain.AimResult;
 @TeleOp
 public class AB_BLUE_Tele extends LinearOpMode {
     Robot robot = new Robot();
-    boolean shooterOn = true;
+    boolean shooterOn = false;
+    double cVelocity = 0, cAngle = 0;
     double velocity = SHOOT_VELOCITY_NER_1, panel = PANEL_NER_1;
     boolean rumbled = false;
 
+    boolean intaking = false;
     boolean lastAimCompleted = false, hasRumbledForAim = false;
 
     @Override
     public void runOpMode() {
         robot.init(hardwareMap);
-        robot.drivetrain.pinPoint.setPosition(new Pose2D(DistanceUnit.INCH, 144 - 8, 8, AngleUnit.RADIANS, Math.PI * 1.5));
+            robot.drivetrain.pinPoint.setPosition(new Pose2D(DistanceUnit.INCH, 144 - 8, 8, AngleUnit.RADIANS, Math.PI * 1.5));
 
         waitForStart();
         robot.drivetrain.pinPoint.setPosition(new Pose2D(DistanceUnit.INCH, 144 - 8, 8, AngleUnit.RADIANS, Math.PI * 1.5));
@@ -47,17 +49,24 @@ public class AB_BLUE_Tele extends LinearOpMode {
             if (aimResult.aimCompleted && !lastAimCompleted && !hasRumbledForAim) {
                 gamepad2.rumble(200);
                 hasRumbledForAim = true;
+                robot.shooter.openGate();
             } else if (!autoAimActive) {
                 hasRumbledForAim = false;
             }
             lastAimCompleted = aimResult.aimCompleted;
 
             if (gamepad1.right_trigger > 0.1) {
+                robot.shooter.closeGate();
+                intaking = true;
                 robot.shooter.triggerSlow();
                 robot.intake.intakeIn(gamepad1.right_trigger);
             } else if (gamepad1.left_trigger > 0.1) {
                 robot.intake.intakeOut();
                 robot.shooter.triggerPut();
+            }
+            else if (gamepad1.right_trigger <= 0.1){
+                robot.intake.intakeStop();
+                intaking = false;
             }
 
             if (gamepad2.xWasPressed()) {
@@ -76,33 +85,51 @@ public class AB_BLUE_Tele extends LinearOpMode {
             }
 
             if (gamepad2.dpadUpWasPressed()) {
-                velocity += 40;
+                cVelocity += 40;
+                if (cVelocity > 320){
+                    cVelocity = 320;
+                }
             } else if (gamepad2.dpadDownWasPressed()) {
-                velocity -= 40;
+                cVelocity -= 40;
+                if (cVelocity < -320){
+                    cVelocity = -320;
+                }
             } else if (gamepad2.dpadLeftWasPressed()) {
-                panel -= 0.04;
+                cAngle -= 0.04;
             } else if (gamepad2.dpadRightWasPressed()) {
-                panel += 0.04;
+                cAngle += 0.04;
             }
 
             if (gamepad2.leftBumperWasPressed()) {
                 shooterOn = !shooterOn;
             }
             if (shooterOn) {
-                robot.shooter.setShooterVelocity(velocity);
-            } else {
+                robot.shooter.setShooterVelocity(velocity + cVelocity);
+                if (!intaking){
+                    robot.shooter.openGate();
+                }
+            }
+            else {
                 robot.shooter.shooterStop();
             }
 
-            robot.shooter.panelTo(panel);
+            robot.shooter.panelTo(panel + cAngle);
 
             if (gamepad2.right_bumper) {
-                robot.intake.intakeIn();
+                if (velocity + cVelocity <= SHOOT_VELOCITY_NER_1){
+                    robot.intake.intakeIn(0.6);
+                }
+                else if (velocity + cVelocity<= SHOOT_VELOCITY_NER_2){
+                    robot.intake.intakeIn(0.8);
+                }
+                else{
+                    robot.intake.intakeIn(1);
+                }
                 if (velocity == SHOOT_VELOCITY_FAR) robot.shooter.triggerFireFar();
                 else robot.shooter.triggerFire();
             } else if (gamepad2.a) {
                 robot.shooter.reverseTriggerServo();
-                robot.intake.intakeIn();
+                robot.intake.intakeIn(1);
             }
 
             if (!gamepad2.a && !gamepad2.right_bumper && !(gamepad1.right_trigger > 0.1)) {
@@ -127,6 +154,8 @@ public class AB_BLUE_Tele extends LinearOpMode {
             telemetry.addData("目标角度", "%.1f°", aimResult.targetHeading);
             telemetry.addData("瞄准状态", aimResult.aimCompleted ? "已完成 ✓" : "瞄准中...");
             telemetry.addData("目标位置", "(%.1f, %.1f)", teleOpTargetX, teleOpTargetY);
+            telemetry.addData("微调角度", cAngle);
+            telemetry.addData("微调飞轮转速", cVelocity);
 
             telemetry.update();
         }

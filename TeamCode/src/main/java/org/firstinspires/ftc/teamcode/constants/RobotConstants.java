@@ -5,10 +5,10 @@ import com.pedropathing.geometry.Pose;
 
 @Configurable
 public class RobotConstants {
-    public static volatile double teleOpTargetXR = 144 - 7;
+    public static volatile double teleOpTargetXR = 144 - 1;
     public static volatile double teleOpTargetYR = 140;
 
-    public static volatile double teleOpTargetXB = 7;
+    public static volatile double teleOpTargetXB = 1;
     public static volatile double teleOpTargetYB = 140;
 
     public static volatile double teleOpTargetY;
@@ -21,11 +21,11 @@ public class RobotConstants {
     public static volatile Pose MANUAL_POS;
 
     // Max speed: 2880
-    public static int SHOOT_VELOCITY_NER_1 = 1900;
-    public static int SHOOT_VELOCITY_NER_2 = 2220;
-    public static int SHOOT_VELOCITY_FAR = 2700;
+    public static int SHOOT_VELOCITY_NER_1 = 1800;
+    public static int SHOOT_VELOCITY_NER_2 = 2120;
+    public static int SHOOT_VELOCITY_FAR = 2750;
 
-    public static double PANEL_NER_1 = 0.68;
+    public static double PANEL_NER_1 = 0.72;
     public static double PANEL_NER_2 = 0.84;
     public static double PANEL_FAR = 0.9;
 

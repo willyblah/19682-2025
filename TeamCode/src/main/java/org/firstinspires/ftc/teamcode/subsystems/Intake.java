@@ -13,16 +13,12 @@ public class Intake {
         intakeStop();
     }
 
-    public void intakeIn() {
-        intake.setPower(1);
+    public void intakeIn(double v) {
+        intake.setPower(v);
     }
 
     public void intakeInAuto() {
         intake.setPower(0.9);
-    }
-
-    public void intakeIn(double p) {
-        intake.setPower(p);
     }
 
     public void intakeOut() {
